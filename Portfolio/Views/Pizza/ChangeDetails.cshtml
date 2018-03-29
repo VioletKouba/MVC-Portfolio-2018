@@ -1,0 +1,86 @@
+﻿@model Portfolio.Models.ChangeDetailsModel
+@{
+	ViewBag.PageName = "Change Details";
+	ViewBag.PageScripts = new string[] {"/Scripts/sha256.js", "/Scripts/hashPasswords.js"};
+}
+<main class="pure-g">
+	<section class="@Global.PureClasses glass">
+		<h2 class="sectionHeading">@ViewBag.PageName</h2>
+		<p class="sectionDescription">To change your account details, just edit any of the fields you wish to update, then enter your current password and press the Change Details button!</p>
+		@using (Html.BeginForm("ChangeDetails", "Pizza", FormMethod.Post, new {@class = "hashedPasswords"})) {
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary("")
+			@Html.HiddenFor(m => m.Country, new {placeholder = "Country"})
+			<p id="requiredExplanation">Indicates that a field is required.</p>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.EmailAddress, new {@class = "required" })
+					@Html.TextBoxFor(m => m.EmailAddress)
+				</div>
+				<div class="inputBlock checkBoxBlock">
+					@Html.LabelFor(m => m.ReceivesEmails)
+					@Html.CheckBoxFor(m => m.ReceivesEmails)
+				</div>
+			</div>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.FirstName, new { @class = "required" })
+					@Html.TextBoxFor(m => m.FirstName)
+				</div>
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.LastName, new { @class = "required" })
+					@Html.TextBoxFor(m => m.LastName)
+				</div>
+			</div>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.PhoneNumber, new { @class = "required" })
+					@Html.TextBoxFor(m => m.PhoneNumber)
+				</div>
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.PhoneExtension)
+					@Html.TextBoxFor(m => m.PhoneExtension)
+				</div>
+			</div>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.StreetAddress, new { @class = "required" })
+					@Html.TextBoxFor(m => m.StreetAddress)
+				</div>
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.ApartmentNumber)
+					@Html.TextBoxFor(m => m.ApartmentNumber)
+				</div>
+			</div>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.City, new { @class = "required" })
+					@Html.TextBoxFor(m => m.City)
+				</div>
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.State, new { @class = "required" })
+					@Html.TextBoxFor(m => m.State)
+				</div>
+			</div>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.ZipCode, new { @class = "required" })
+					@Html.TextBoxFor(m => m.ZipCode)
+				</div>
+			</div>
+			<br/>
+			<div class="formBlock">
+				<div class="inputBlock">
+					@Html.LabelFor(m => m.CurrentPasswordHash, new { @class = "required" })
+					@Html.PasswordFor(m => m.CurrentPasswordHash)
+				</div>
+			</div>
+			<br/>
+			<div class="formBlock">
+				<div class="inputBlock">
+					<input type="submit" value="Change Details"/>
+				</div>
+			</div>
+		}
+	</section>
+</main>

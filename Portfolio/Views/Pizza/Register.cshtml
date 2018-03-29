@@ -1,0 +1,99 @@
+﻿@model Portfolio.Models.RegistrationModel
+@{
+	ViewBag.PageName = "Register";
+	ViewBag.PageScripts = new string[] {"/Scripts/sha256.js", "/Scripts/hashPasswords.js"};
+}
+<main class="pure-g">
+	<section class="@Global.PureClasses glass">
+		@{
+			if(Model != null && Model.Registered == true) {
+				<h2 class="sectionHeading">Registered</h2>
+				<p class="sectionDescription">Congratulations! You're now signed up for a @ViewBag.SectionName account, and have been logged in automatically. In future visits to the site, you may log in at any time with the email address and password you provided.</p>
+			}
+			else {
+				<h2 class="sectionHeading">@ViewBag.PageName</h2>
+				<p class="sectionDescription">A @ViewBag.SectionName account allows you to save your location details for all future orders and receive emails about current promotions. It's a real lifetime value! Please note that @ViewBag.SectionName is currently only located in the US.</p>
+				using (Html.BeginForm("Register", "Pizza", FormMethod.Post, new { @class = "hashedPasswords" }))
+				{
+					@Html.AntiForgeryToken()
+					@Html.ValidationSummary("")
+					@Html.HiddenFor(m => m.EncryptionAlgorithm, new { Value = "SHA-256" })
+					@Html.HiddenFor(m => m.Country, new { Value = "United States of America" })
+					<p id="requiredExplanation">Indicates that a field is required.</p>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.EmailAddress, new { @class = "required" })
+							@Html.TextBoxFor(m => m.EmailAddress)
+						</div>
+						<div class="inputBlock checkBoxBlock">
+							@Html.LabelFor(m => m.ReceivesEmails)
+							@Html.CheckBoxFor(m => m.ReceivesEmails, new { @checked = true })
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.PasswordHash, new { @class = "required" })
+							@Html.PasswordFor(m => m.PasswordHash)
+						</div>
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.ConfirmPasswordHash, new { @class = "required" })
+							@Html.PasswordFor(m => m.ConfirmPasswordHash)
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.FirstName, new { @class = "required" })
+							@Html.TextBoxFor(m => m.FirstName)
+						</div>
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.LastName, new { @class = "required" })
+							@Html.TextBoxFor(m => m.LastName)
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.PhoneNumber, new { @class = "required" })
+							@Html.TextBoxFor(m => m.PhoneNumber)
+						</div>
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.PhoneExtension)
+							@Html.TextBoxFor(m => m.PhoneExtension)
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.StreetAddress, new { @class = "required" })
+							@Html.TextBoxFor(m => m.StreetAddress)
+						</div>
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.ApartmentNumber)
+							@Html.TextBoxFor(m => m.ApartmentNumber)
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.City, new { @class = "required" })
+							@Html.TextBoxFor(m => m.City)
+						</div>
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.State, new { @class = "required" })
+							@Html.TextBoxFor(m => m.State)
+						</div>
+					</div>
+					<div class="formBlock">
+						<div class="inputBlock">
+							@Html.LabelFor(m => m.ZipCode, new { @class = "required" })
+							@Html.TextBoxFor(m => m.ZipCode)
+						</div>
+					</div>
+					<br/>
+					<div class="formBlock">
+						<div class="inputBlock">
+							<input type="submit" value="Register"/>
+						</div>
+					</div>
+				}
+			}
+		}
+	</section>
+</main>

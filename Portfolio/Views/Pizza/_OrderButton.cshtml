@@ -1,0 +1,30 @@
+﻿@model Portfolio.Models.MenuDataModel.MenuData.MenuItemData
+<div class="userControl orderButton">
+	<span class="buttonLabel">Order</span>
+	<i class="fa fa-chevron-right stateIndicator"></i>
+	<div class="card itemChoices">
+		@if (Model.Choices != null) {
+			<div class="verticalBlock">
+				@if(Model.ChoiceHeading != null) {<h4 class="choiceHeading">@Model.ChoiceHeading</h4>}
+				<ul class="choiceList">
+					@for(int i = 0; i < Model.Choices.Count; i++) {@Html.Partial("~/Views/Pizza/_ItemChoice.cshtml", Model.Choices.ElementAt(i), new ViewDataDictionary(this.ViewData) { {"Index", i} })}
+				</ul>
+			</div>
+		}
+		<div class="verticalBlock">
+			<h4>Quantity:</h4>
+			<div class="quantityChoice">
+				<i class="fa fa-minus-square-o userControl quantityControl quantityDecrement"></i>
+				<span class="quantityNumber">1</span>
+				<i class="fa fa-plus-square-o userControl quantityControl quantityIncrement"></i>
+			</div>
+		</div>
+		<div class="verticalBlock">
+			<h4>Price:</h4>
+			<span class="priceDisplay">@(Model.Choices != null ? Model.Choices.ElementAt(0).Value.Price.ToString() : Model.Price.ToString())</span>
+		</div>
+		<div class="verticalBlock">
+			<div class="userControl orderConfirmation addToCartButton">Add to Cart</div>
+		</div>
+	</div>
+</div>

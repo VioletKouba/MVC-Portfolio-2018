@@ -1,0 +1,46 @@
+﻿@model Portfolio.Models.MenuDataModel
+<div class="disabled" id="sidebarCartControl">
+	<span class="userControl" id="cartLabel">
+		<i class="fa fa-shopping-cart" id="cartIcon"></i>
+		<span id="labelText">Your Cart</span>
+		<span class="parenthesized" id="cartCounter">0</span>
+	</span>
+	<div class="card pizzaCart beforeLoading" id="sidebarCart">
+		<div class="templateContainer">
+			<li class="itemListing" id="cartItemListingTemplate">
+				<div class="listingBlock">
+					<i class="fa fa-trash userControl removeItem"></i>
+					<b class="itemName"></b>
+				</div>
+				<div class="listingBlock choiceBlock">
+					<a class="editDesign" href="@Url.Action("Designer", "Pizza")">Edit</a>
+					<span class="choiceName"></span>
+				</div>
+				<div class="listingBlock">
+					<span class="priceDisplay itemPrice"></span>
+					<span class="priceDisplay finalPrice"></span>
+					<div class="quantityChoice">
+						<i class="fa fa-minus-square-o userControl quantityControl quantityDecrement"></i>
+						<span class="quantityNumber"></span>
+						<i class="fa fa-plus-square-o userControl quantityControl quantityIncrement"></i>
+					</div>
+				</div>
+			</li>
+		</div>
+		<i class="userControl fa fa-times-circle fa-lg" id="closeSidebar"></i>
+		<div class="sidebarBlock">
+			<h3>Items:</h3>
+		</div>
+		<div class="sidebarBlock">
+			<ul class="itemList"></ul>
+		</div>
+		<div class="sidebarBlock">
+			<h4>Subtotal:</h4>
+			<span class="priceDisplay cartSubtotal"></span>
+			<span class="priceDisplay finalSubtotal"></span>
+		</div>
+		<div class="sidebarBlock">
+			@Html.ActionLink("Cart Page/To Checkout", "Cart", "Pizza", null, new { @class = "userControl orderConfirmation" })
+		</div>
+	</div>
+</div>

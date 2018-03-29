@@ -1,0 +1,6 @@
+﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData>
+<section class="@Global.PureClasses glass bigMenu" id="@Model.Key">
+	<h2 class="sectionHeading menuName">@Model.Value.Name</h2>
+	<p class="sectionDescription menuDescription">@Model.Value.Description</p>
+	@foreach (KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData> MenuItem in Model.Value.Items) {@Html.Partial("~/Views/Pizza/_BigMenuItem.cshtml", MenuItem)}
+</section>

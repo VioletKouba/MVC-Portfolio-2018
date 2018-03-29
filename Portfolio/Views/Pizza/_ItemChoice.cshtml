@@ -1,0 +1,6 @@
+﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData.ChoiceData>
+<li class="userControl itemChoice @if((int)ViewData["Index"] == 0){<text>selected</text>}" data-key="@Model.Key">
+	<span class="choiceName">@Model.Value.Name</span>
+	<i class="fa fa-square-o checkBox unchecked"></i>
+	<i class="fa fa-check-square-o checkBox checked"></i>
+</li>

@@ -1,0 +1,77 @@
+body {
+	background-color: #C7C7C7;
+	margin: 89px 0 59px;
+}
+
+footer {
+	background-color: #FAFAFA;
+	bottom: 0;
+	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.333);
+	height: 51px;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+}
+
+footer .entersFromLeft {
+	animation-duration: 950ms;
+}
+
+h5 {
+	margin: 16px 0;
+}
+
+@media screen and (max-width: 34em) {
+	h5 {
+		margin: 10px 0;
+	}
+}
+
+header {
+	background-color: #FAFAFA;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.333);
+	height: 81px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+@media screen and (max-width: 64em) {
+	header section {
+		text-align: center;
+	}
+}
+
+main section {
+	background-color: #FAFAFA;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.333);
+	margin: 8px auto;
+	padding: 0 16px;
+}
+
+main .entersFromLeft:nth-child(1) {
+	animation-duration: 700ms;
+}
+
+main .entersFromLeft:nth-child(2) {
+	animation-duration: 750ms;
+}
+
+main .entersFromLeft:nth-child(3) {
+	animation-duration: 800ms;
+}
+
+main .entersFromLeft:nth-child(4) {
+	animation-duration: 850ms;
+}
+
+main .entersFromLeft:nth-child(5) {
+	animation-duration: 900ms;
+}
+
+.entersFromLeft {
+	animation: enterFromLeft 650ms cubic-bezier(0.50,0.25,0.25,1) 100ms 1 normal backwards;
+	position: relative;
+}

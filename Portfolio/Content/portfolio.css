@@ -1,0 +1,220 @@
+/*The font Roboto by Christian Robertson is distributed under the Apache 2.0 license, a copy of which has been included in the files' directory.*/
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/roboto-regular.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/fonts/roboto-bold.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/roboto-mono.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@keyframes enterFromLeft {
+	0% {right: 100%;}
+	75% {right: -1%;}
+	100% {right: 0;}
+}
+
+@keyframes highlight {
+	0% {background-color: hsl(0, 0%, 95%);}
+	50% {background-color: hsl(70, 100%, 70%);}
+	100% {background-color: hsl(0, 0%, 95%);}
+}
+
+@keyframes pulse {
+	0% {transform: rotate(0deg) scale(1);}
+	25% {transform: rotate(-4deg) scale(1.05);}
+	50% {transform: rotate(-4deg) scale(1.1);}
+	75% {transform: rotate(4deg) scale(1.05);}
+	100% {transform: rotate(0deg) scale(1);}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+button, html, input, select, .pure-g [class *= "pure-u"] {
+	/*This wouldn't normally be good practice, but it is officially recommended by Pure: https://purecss.io/grids/#using-grids-with-custom-fonts*/
+	font-family: "Roboto", "Noto", sans-serif;
+}
+
+code, kbd, pre, samp, textarea {
+	font-family: 'Roboto Mono', monospace;
+}
+
+header, footer, main {
+	text-align: center;
+}
+
+noscript {
+	background-color: #000000;
+	height: 100vh;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 4;
+}
+
+noscript div {
+	background-color: #212121;
+	border: 1px solid #484848;
+	color: rgba(255, 255, 255, 0.87);
+	left: 50%;
+	padding: 16px;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+section {
+	margin: auto;
+	text-align: left;
+}
+
+.userControl {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.hiddenContents, .hiddenContents * {
+	color: transparent !important;
+	text-shadow: none !important;
+}
+
+
+#siteNav {
+	background-color: #454545;
+	font-size: x-large;
+	left: -142px;
+	padding-bottom: 12px;
+	position: fixed;
+	top: 0;
+	transition: left 250ms ease-in-out;
+	width: 142px;
+	z-index: 3;
+}
+
+#siteNav a {
+	color: rgba(255, 255, 255, 0.7);
+	display: block;
+	padding: 4px 68px 4px 16px;
+	position: relative;
+	text-decoration: none;
+	transition: 100ms ease-out;
+	transition-property: background-color,color;
+}
+
+#siteNav a:hover {
+	background-color: #1D1D1D;
+	color: White;
+}
+
+#siteNav a:hover:not(#selfLink)::before {
+	background-color: #17E617;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 6px;
+}
+
+#siteNav h3 {
+	background-color: #303030;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 20px;
+	font-weight: normal;
+	height: 52px;
+	margin: 0 0 12px;
+	padding: 14.5px 0 14.5px 12px;
+}
+
+#siteNav .drawerControl {
+	color: White;
+	height: 52px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	transition: 100ms ease-in;
+	transition-property: background-color,font-size,opacity,padding;
+	width: 52px;
+}
+
+#siteNav #navClose {
+	cursor: default;
+	font-size: 0;
+	line-height: 1.1;
+	opacity: 0.7;
+	padding: 26px;
+	right: 0;
+}
+
+#siteNav #navOpen {
+	background-color: #303030;
+	font-size: 24px;
+	opacity: 0.8;
+	padding: 14px;
+	right: -52px;
+}
+
+#siteNav #navOpen:hover {
+	opacity: 1;
+}
+
+#siteNav #selfLink {
+	padding: 4px 62px 4px 22px;
+}
+
+#siteNav #selfLink::before {
+	background-color: #1717E6;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 6px;
+	z-index: 3;
+}
+
+#siteNav.openDrawer {
+	left: 0;
+	transition-timing-function: ease-in-out;
+}
+
+#siteNav.openDrawer #navClose {
+	cursor: pointer;
+	font-size: 24px;
+	padding: 12px 11px 10px;
+}
+
+#siteNav.openDrawer #navClose:hover {
+	background-color: #1D1D1D;
+	opacity: 1;
+}
+
+#siteNav.openDrawer #navOpen {
+	background-color: transparent;
+	cursor: default;
+	font-size: 0;
+	padding: 26px;
+}

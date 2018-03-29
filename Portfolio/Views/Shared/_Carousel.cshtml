@@ -1,0 +1,18 @@
+﻿@model Portfolio.Models.CarouselModel
+@{
+	int ItemCount = Model.Items.Count();
+	int MiddleItem = ItemCount / 2;
+}
+<div class="carousel" data-automatic="@(Model.Automatic ? "1" : "0")" data-automaticDelay="@Model.AutomaticDelay.ToString()" data-delayedResume="@(Model.DelayedResume ? "1" : "0")" data-resumeDelay="@Model.ResumeDelay.ToString()" data-rotating="0">
+	<i class="fa fa-angle-left carouselControl carouselLeft"></i>
+	<div class="carouselItemContainer" style="right: @(MiddleItem.ToString() + "00%")">
+		@helper generateCarouselItems(int Start, int Stop) {for(int i = Start; i <= Stop; i++) {@Html.Partial("~/Views/Shared/_CarouselItem.cshtml", Model.Items.ElementAt(i), new ViewDataDictionary(this.ViewData) { {"Index", i} })}}
+		@generateCarouselItems(MiddleItem + 1, ItemCount - 1)
+		@generateCarouselItems(0, MiddleItem)
+	</div>
+	<i class="fa fa-angle-right fa-5x carouselControl carouselRight"></i>
+	<div class="carouselCaptionPane"></div>
+	<div class="carouselPlaceDisplay">
+		@for(int i = 0; i < ItemCount; i++) {<i class="fa fa-circle carouselIndicator@{if(i == 0) {<text> currentIndicator</text>}}"></i>}
+	</div>
+</div>

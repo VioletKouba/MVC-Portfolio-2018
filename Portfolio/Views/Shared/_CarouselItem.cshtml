@@ -1,0 +1,4 @@
+﻿@model Portfolio.Models.CarouselItemModel
+<a class="carouselItem@{if((int)ViewData["Index"] == 0) {<text> currentItem</text>;}}" @{if (Model.URL != null) {<text> href="@Model.URL" </text>}} style="background: @Model.Background;">
+	<span class="itemCaption">@Model.Caption</span>
+</a>

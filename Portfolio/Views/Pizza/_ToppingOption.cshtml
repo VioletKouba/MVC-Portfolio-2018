@@ -1,0 +1,9 @@
+﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData.OptionsData.OptionData>
+<li class="toppingOption" id="@Model.Key">
+	<span class="userControl toppingSelector disabledUntilLoaded">@Model.Value.Name</span>
+	<div class="sideSelection">
+		<div class="userControl sideSelector leftSide"></div>
+		<div class="userControl sideSelector bothSides"></div>
+		<div class="userControl sideSelector rightSide"></div>
+	</div>
+</li>

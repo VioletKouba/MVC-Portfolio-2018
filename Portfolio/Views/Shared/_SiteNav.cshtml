@@ -1,0 +1,8 @@
+﻿<nav id="siteNav">
+	<i class="fa fa-bars userControl drawerControl" id="navOpen"></i>
+	<i class="fa fa-times userControl drawerControl" id="navClose"></i>
+	<h3>Pages</h3>
+	<a href="@Url.Action("Index", "Portfolio")" @if (ViewBag.SectionName == Portfolio.Controllers.PortfolioController.SectionName) { @("id = selfLink") ; }>Index</a>
+	<a href="@Url.Action("Home", "Pizza")" @if (ViewBag.SectionName == Portfolio.Controllers.PizzaController.SectionName) { @("id = selfLink") ; }>Pizza</a>
+	<a href="https://github.com/IanDoone/MVC-Portfolio-2018">Source</a>
+</nav>

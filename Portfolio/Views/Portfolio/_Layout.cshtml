@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.SectionName - @ViewBag.PageName</title>
+	@Styles.Render("~/Content/portfolio")
+	<link rel="stylesheet" type="text/css" href="/Content/index.css">
+	@if (ViewBag.PageStyles != null) { foreach (string style in ViewBag.PageStyles) {<link rel="stylesheet" type="text/css" href=@style>} }
+	@Scripts.Render("~/Scripts/portfolio")
+	@if (ViewBag.PageScripts != null) { foreach (string script in ViewBag.PageScripts) {<script src=@script></script>} }
+</head>
+<body>
+	@Html.Partial("~/Views/Shared/_NoScript.cshtml")
+	@Html.Partial("~/Views/Shared/_SiteNav.cshtml")
+	@RenderBody()
+</body>
+</html>

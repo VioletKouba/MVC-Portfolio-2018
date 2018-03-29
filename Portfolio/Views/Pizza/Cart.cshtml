@@ -1,0 +1,75 @@
+﻿@model Portfolio.Models.MenuDataModel
+@{
+	ViewBag.PageName = "Cart";
+	ViewBag.PageNotifications = new Portfolio.Models.NotificationModel[] {
+		new Portfolio.Models.NotificationModel {
+			ID = "duplicatePromoCode",
+			Text = "We're sorry, the code you entered is already applied to your order. Please double check the code you entered."
+		}
+	};
+}
+<main class="pure-g pizzaCart" id="pageCart">
+	<div class="templateContainer">
+		<li class="itemListing" id="cartItemListingTemplate">
+			<div class="listingBlock">
+				<span class="userControl floatRight removeItem">Remove</span>
+				<b class="itemName"></b>
+				<span class="parenthesized choiceName"></span>
+			</div>
+			<div class="listingBlock designOptions">
+				<a class="editDesign" href="@Url.Action("Designer", "Pizza")">Edit</a>
+				<div class="optionBlock">
+					<b>Sauce & cheese: </b>
+					<span class="sauceOptions"></span>
+					<span class="cheeseOption"></span>
+				</div>
+				<div class="optionBlock bothSideToppings">
+					<b>Both sides: </b>
+					<span class="toppingsDisplay"></span>
+				</div>
+				<div class="optionBlock leftSideToppings">
+					<b>Left side: </b>
+					<span class="toppingsDisplay"></span>
+				</div>
+				<div class="optionBlock rightSideToppings">
+					<b>Right side: </b>
+					<span class="toppingsDisplay"></span>
+				</div>
+			</div>
+			<div class="listingBlock">
+				<span class="priceDisplay itemPrice"></span>
+				<span class="priceDisplay finalPrice"></span>
+				<div class="quantityChoice">
+					<i class="fa fa-minus-square-o userControl quantityControl quantityDecrement"></i>
+					<span class="quantityNumber"></span>
+					<i class="fa fa-plus-square-o userControl quantityControl quantityIncrement"></i>
+				</div>
+			</div>
+		</li>
+	</div>
+	<section class="@Global.PureClasses glass">
+		<h2 class="sectionHeading">Your Cart</h2>
+		<p class="hiddenContents sectionDescription shown">Your cart doesn't currently have any items in it. Why not take a look at our <a href="@Url.Action("Menu", "Pizza")">menu</a> and change that?</p>
+		<ul class="itemList"></ul>
+		<div id="orderDetails">
+			<div class="detailsBlock">
+				<input class="promoCode" placeholder="Enter promo code" type="text" />
+				<button id="applyPromoCode">Apply code</button>
+			</div>
+			<div class="detailsBlock">
+				<b>Subtotal: </b>
+				<span class="priceDisplay cartSubtotal"></span>
+				<span class="priceDisplay finalSubtotal"></span>
+			</div>
+			<div class="detailsBlock" id="appliedPromoCodes">
+				<b>Applied promo codes: </b>
+				<span class="promoCode" id="promoCodeDisplay"></span>
+			</div>
+			<div class="detailsBlock" id="orderConfirmation">
+				<a href="@Url.Action("ThankYou", "Pizza")">
+					<div class="glass button">Proceed to Checkout</div>
+				</a>
+			</div>
+		</div>
+	</section>
+</main>

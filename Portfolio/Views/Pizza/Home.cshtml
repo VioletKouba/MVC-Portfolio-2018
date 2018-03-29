@@ -1,0 +1,66 @@
+﻿@{
+	ViewBag.PageName = "Home";
+	ViewBag.PageStyles = new string[] {"/Content/carousel.css"};
+	ViewBag.PageScripts = new string[] {"/Scripts/carousel.js"};
+}
+<main class="pure-g">
+	<section class="@Global.PureClasses">
+		@Html.Partial("~/Views/Shared/_Carousel.cshtml", new Portfolio.Models.CarouselModel {
+			Automatic = true,
+			AutomaticDelay = 3000,
+			DelayedResume = true,
+			ResumeDelay = 20000,
+			Items = new List<Portfolio.Models.CarouselItemModel> {
+				new Portfolio.Models.CarouselItemModel {
+					URL = Url.Action("Menu", "Pizza") + "#signatureThinCrust",
+					Background = "url(/images/signaturethincrust.jpg)",
+					Caption = "Signature Thin Crust"
+				},
+				new Portfolio.Models.CarouselItemModel {
+					URL = Url.Action("Menu", "Pizza") + "#mediterraneanGardenStyle",
+					Background = "url(/images/mediterraneangardenstyle.jpg)",
+					Caption = "Mediterranean Garden Style"
+				},
+				new Portfolio.Models.CarouselItemModel {
+					URL = Url.Action("Menu", "Pizza") + "#savoryStuffedCrust",
+					Background = "url(/images/savorystuffedcrust.jpg)",
+					Caption = "Savory Stuffed Crust"
+				}
+		   }
+	   })
+	</section>
+	<section class="@Global.PureClasses">
+		<div class="column" id="informationColumn">
+			<div class="columnItem glass">
+				<h3>Pasta Dishes Now Available</h3>
+				<p>In order to better serve the needs of our customers, @ViewBag.SectionName will now be offering fresh pasta dishes, starting with <a href="@Url.Action("Menu", "Pizza")#lasagnaBeefMarinara">lasagna beef marinara</a>, <a href="@Url.Action("Menu", "Pizza")#spaghettiChickenAlfredo">spaghetti chicken Alfredo</a>, and <a href="@Url.Action("Menu", "Pizza")#spaghettiBeefMarinara">spaghetti beef marinara</a>. If there are any other pasta preparations you'd like to see, let us know!</p>
+			</div>
+			<div class="columnItem glass">
+				<h3>New Dessert on the Menu</h3>
+				<p>We are happy to announce that our menu now boasts the deliciously rich <a href="@Url.Action("Menu", "Pizza")#tripleFudgeBrownie">triple fudge brownie</a>. When you've got a chocolate craving that's hard to satisfy, treat yourself to a dessert where every bite is packed with as much warm, chocolatey goodness as you can handle!</p>
+			</div>
+			<div class="columnItem glass">
+				<h3>Special Promotional Code</h3>
+				<p>In honor of our first successful month of operation, @ViewBag.Section would like to offer you a special deal! With an order containing any extra large pizza and your choice of dessert, enter the code "<span class="promoCode">1STMONTHSPECIAL</span>" on the @Html.ActionLink("main cart page", "Cart", "Pizza") to receive 20% off every qualifying item!</p>
+			</div>
+			<div class="columnItem glass">
+				<h3>@ViewBag.SectionName is Open for Business</h3>
+				<p>It is with pride that we announce that @ViewBag.SectionName opened its doors today to a great first day of business. We would like to extend our personal thanks to all of the customers we had today, and all the ones we hope to receive in the future. Buon appetito!</p>
+			</div>
+		</div>
+		<div class="column" id="dealColumn">
+			<div class="columnItem glass">
+				<div class="dealImage" style="background-image: url(/images/garlicbreadsticks.jpg);"></div>
+				<p>We know that pizza and breadsticks is a time-honored combo, like hot and savory, or sugar and spice. Our classic <a href="@Url.Action("Menu", "Pizza")#garlicBreadsticks">garlic breadsticks</a>, served with marinara sauce, continue that tradition for only $5.49.</p>
+			</div>
+			<div class="columnItem glass">
+				<div class="dealImage" style="background-image: url(/images/chocolatechipcookies.jpg);"></div>
+				<p>Saved room for dessert? You'll be glad you did with our premium <a href="@Url.Action("Menu", "Pizza")#chocolateChipCookies">chocolate chip cookies</a>! Just $3.99 for 6 soft, mouth-watering treats to put the perfect finishing touch on your meal.</p>
+			</div>
+			<div class="columnItem glass">
+				<div class="dealImage" style="background-image: url(/images/spaghettichickenalfredo.jpg); background-position: left center;"></div>
+				<p>We're not just about pizza! While our normal offerings are delicious, if you're looking for something different, try our <a href="@Url.Action("Menu", "Pizza")#spaghettiChickenAlfredo">chicken Alfredo</a> pasta, starting at $7.99!</p>
+			</div>
+		</div>
+	</section>
+</main>

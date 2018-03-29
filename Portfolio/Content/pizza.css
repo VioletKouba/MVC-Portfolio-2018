@@ -1,0 +1,1053 @@
+body {
+	background: url("/images/backgroundpizza.jpeg") left top/cover fixed;
+}
+
+footer h5 {
+	margin: 16px 0;
+}
+
+footer section {
+	padding: 0 16px;
+	text-align: center;
+}
+
+footer .glass {
+	background-image: url("/images/glassfooter.png");
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 50%, rgba(220, 220, 220, 0.8) 100%);
+	border-bottom-style: none;
+}
+
+form {
+	padding: 0 16px 16px;
+}
+
+form .formBlock .inputBlock {
+	display: inline-block;
+	margin: 2px;
+}
+
+form .formBlock .inputBlock input {
+	display: block;
+}
+
+form .formBlock .inputBlock label {
+	display: block;
+}
+
+form .formBlock .inputBlock label.required::after {
+	color: red;
+	content: " *";
+	vertical-align: top;
+}
+
+form .formBlock .inputBlock.checkBoxBlock input {
+	display: inline-block;
+	margin: 4px;
+}
+
+form .formBlock .inputBlock.checkBoxBlock label {
+	display: inline-block;
+}
+
+form #requiredExplanation::before {
+	color: red;
+	content: "* ";
+	vertical-align: top;
+}
+
+header h1 {
+	font-size: 40px;
+}
+
+header section {
+	font-variant: small-caps;
+	text-align: center;
+}
+
+header .glass {
+	background-image: url("/images/glassheader.png");
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.8) 100%);
+	border-top-style: none;
+}
+
+main {
+	margin: 10px 0;
+}
+
+main a:not(.carouselItem) {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+main a:not(.carouselItem):hover {
+	text-decoration: underline;
+}
+
+main section {
+	margin: 10px auto;
+}
+
+main .glass {
+	background-image: url("/images/glassmain.png");
+	background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9) 30%, rgba(220, 220, 220, 0.7) 100%);
+}
+
+.button {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 16px;
+	padding: 4px 16px;
+}
+
+.button a {
+	color: black;
+	text-decoration: none;
+}
+
+.button.glass {
+	background-image: url("/images/glassbutton.png");
+	background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7) 30%, rgba(220, 220, 220, 0.5) 100%);
+}
+
+.button.glass:hover {
+	/*border-color: rgba(136, 136, 136, 0.7) rgba(220, 220, 220, 0.7) rgba(220, 220, 220, 0.7) rgba(136, 136, 136, 0.7);*/
+	/*padding: 5px 15px 3px 17px;*/
+	text-decoration: underline;
+}
+
+.card {
+	background-color: hsl(0, 0%, 95%);
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+.card .checkBox::before, .card .orderConfirmation, .card .quantityControl::before {
+	background-color: hsl(0, 0%, 95%);
+}
+
+.column#dealColumn {
+	text-align: center;
+}
+
+.column#dealColumn .dealImage {
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	height: 100px;
+	margin-top: 16px;
+	width: 100%;
+}
+
+.column .columnItem {
+	padding: 0 16px;
+}
+
+.column .columnItem ~ .columnItem {
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 35em) {
+	.column ~ .column {
+		margin-top: 20px;
+	}
+}
+@media screen and (min-width: 35em) {
+	.column#dealColumn {
+		float: right;
+		margin-left: 2%;
+		width: 36%;
+	}
+
+	.column#informationColumn {
+		float: left;
+		margin-right: 2%;
+		width: 60%;
+	}
+}
+
+.glass {
+	background-repeat: no-repeat;
+	border-color: rgba(220, 220, 220, 0.7) rgba(136, 136, 136, 0.7) rgba(136, 136, 136, 0.7) rgba(220, 220, 220, 0.7);
+	border-style: solid;
+	border-width: 2px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.orderButton, #pizzaMenu #designStartButton {
+	border: 2px solid black;
+	border-radius: 11px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+	display: block;
+	position: absolute;
+}
+
+.orderButton {
+	font-size: 16px;
+	height: 25px;
+	padding: 1px calc(5px + 19px) 1px 5px;
+	width: 73px;
+}
+
+.orderButton .itemChoices {
+	animation: none 500ms ease-out 500ms 2 normal none;
+	cursor: default;
+	display: none;
+	padding: 8px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: calc(100% + 0.5px);
+	-ms-transform: translateX(calc(-36.5px + 50%));
+	-webkit-transform: translateX(calc(-36.5px + 50%));
+	transform: translateX(calc(-36.5px + 50%));/*36.5px is 50% of the parent's width; implemented to avoid a bug caused by the parent's padding transitioning.*/
+	white-space: nowrap;
+}
+
+.orderButton .itemChoices h4 {
+	margin: 0 0 4px;
+	text-align: center;
+}
+
+.orderButton .itemChoices .choiceList {
+	margin: 0;
+}
+
+.orderButton .itemChoices .choiceList .itemChoice {
+	cursor: pointer;
+	padding-right: calc(14px + 16px);
+}
+
+.orderButton .itemChoices .choiceList .itemChoice .checkBox {
+	animation: none 250ms ease-in-out 0s 1 normal none;
+	display: block;
+	padding: 1.5px 0;
+	position: absolute;
+	right: 0;
+	text-align: left;
+	top: 0;
+	width: 16px;
+}
+
+.orderButton .itemChoices .choiceList .itemChoice .checked {
+	display: none;
+}
+
+.orderButton .itemChoices .choiceList .itemChoice.selected .checked {
+	display: block;
+}
+
+.orderButton .itemChoices .choiceList .itemChoice.selected .unchecked {
+	display: none;
+}
+
+.orderButton .itemChoices .verticalBlock ~ .verticalBlock {
+	margin-top: 12px;
+}
+
+.orderButton .stateIndicator {
+	border-left: 2px solid black;
+	font-size: 12px;
+	padding: 5px 5px 4px;
+	position: absolute;
+	right: 0;
+	transition: padding 25ms linear;
+	top: 0;
+}
+
+.orderButton .stateIndicator::before {
+	display: block;
+	transition: transform 25ms linear;
+}
+
+.orderButton.droppedDown {
+	z-index: 2;
+}
+
+.orderButton.droppedDown .itemChoices {
+	display: block;
+}
+
+.orderButton.droppedDown .stateIndicator {
+	padding: 5px 6px 4px 4px;
+}
+
+.orderButton.droppedDown .stateIndicator::before {
+	-ms-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.orderConfirmation {
+	border: 1px solid black;
+	border-radius: 3px;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+	color: black;
+	display: block;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+.parenthesized::before {
+	content: "(";
+}
+
+.parenthesized::after {
+	content: ")";
+}
+
+.pizzaCart .itemList {
+	padding-left: 0;
+}
+
+.pizzaCart .itemList .itemListing {
+	list-style-type: none;
+}
+
+.pizzaCart .itemList .itemListing .listingBlock.designOptions .optionsBlock .toppingsDisplay::after {
+	content: ".";
+}
+
+.pizzaCart .itemList .itemListing .listingBlock .editDesign {
+	float: right;
+	margin-left: 16px;
+}
+
+.pizzaCart .itemList .itemListing .listingBlock .quantityChoice {
+	float: right;
+	margin-left: 16px;
+}
+
+.pizzaCart .itemList .itemListing .listingBlock .quantityChoice .quantityControl {
+	width: auto;
+}
+
+.pizzaCart .itemList .itemListing .listingBlock .removeItem {
+	float: right;
+	margin-left: 16px;
+}
+
+.pizzaCart .itemList .itemListing .listingBlock .removeItem:hover {
+	text-decoration: underline;
+}
+
+.pizzaCart .itemList .itemListing ~ .itemListing {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pizzaCart#pageCart .itemList {
+	margin: 16px;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock .choiceName {
+	white-space: nowrap;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock .itemName {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock.designOptions {
+	margin-left: 16px;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock.designOptions .editDesign {
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock.designOptions .optionBlock ~ .optionBlock {
+	margin-top: 6px;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock.designOptions .sauceOptions::after {
+	content: ", ";
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock .removeItem {
+	color: #0000ee;
+	font-size: 14px;
+}
+
+.pizzaCart#pageCart .itemList .itemListing .listingBlock ~ .listingBlock {
+	margin-top: 8px;
+}
+
+.pizzaCart#pageCart .itemList .itemListing ~ .itemListing {
+	margin-top: 14px;
+	padding-top: 10px;
+}
+
+.pizzaCart#pageCart .sectionDescription {
+	display: none;
+}
+
+.pizzaCart#pageCart .sectionDescription.shown {
+	display: block;
+}
+
+.pizzaCart#pageCart .sectionDescription.shown ~ * {
+	display: none;
+}
+
+.pizzaCart#pageCart #orderDetails {
+	border-top: 3px solid black;
+	margin: 0 16px 16px;
+	padding-top: 16px;
+}
+
+.pizzaCart#pageCart #orderDetails .detailsBlock ~ .detailsBlock {
+	margin-top: 5px;
+}
+
+.pizzaCart#pageCart #orderDetails .detailsBlock#orderConfirmation {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.pizzaCart#pageCart #orderDetails .detailsBlock#orderConfirmation a .button {
+	color: Black;
+	margin: 0;
+}
+
+.pizzaCart#sidebarCart {
+	font-variant: normal;
+	max-height: 100vh;
+	overflow-y: auto;
+	padding: 16px;
+	position: fixed;
+	right: -100%;
+	top: 0;
+	transition: right 500ms ease-in-out;
+	z-index: 3;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock h3 {
+	margin: 0;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock h4 {
+	margin: 0 0 2px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList {
+	margin: 0;
+	text-align: left;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing {
+	animation: none 500ms ease-out 500ms 2 normal none;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .choiceName {
+	font-size: 14px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .editDesign {
+	font-size: 13px;
+	padding-top: 2px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .quantityChoice > * {
+	font-size: 14px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .quantityChoice .quantityNumber {
+	min-width: 16px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .removeItem {
+	transition: color ease-in-out 100ms;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock .removeItem:hover {
+	color: #FF0000;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock ~ .listingBlock {
+	margin-top: 2px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing .listingBlock.choiceBlock {
+	margin-left: 8px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .itemList .itemListing ~ .itemListing {
+	margin-top: 6px;
+	padding-top: 4px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock .orderConfirmation {
+	margin-bottom: 16px;
+}
+
+.pizzaCart#sidebarCart .sidebarBlock ~ .sidebarBlock {
+	margin-top: 10px;
+}
+
+.pizzaCart#sidebarCart #closeSidebar {
+	font-size: 20px;
+	opacity: 0.7;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.pizzaCart#sidebarCart #closeSidebar:hover {
+	opacity: 1;
+}
+
+.pizzaCart#sidebarCart.beforeLoading {
+	transition-duration: 1ms;/*Allowing the transitionend event to fire.*/
+}
+
+.priceDisplay::before {
+	content: "$";
+}
+
+.priceDisplay + .priceDisplay {
+	display: none;
+}
+
+.priceDisplay.discounted {
+	color: hsl(0, 75%, 50%);
+	text-decoration: line-through;
+}
+
+.priceDisplay.discounted + .priceDisplay {
+	color: hsl(120, 100%, 35%);
+	display: inline;
+}
+
+.promoCode {
+	font-family: 'Roboto Mono', monospace;
+}
+
+.quantityChoice .quantityNumber {
+	animation: none 250ms ease-in-out 0s 1 normal none;
+	display: inline-block;
+	min-width: 18px;
+}
+
+.quantityChoice .quantityControl {
+	padding: 1px 0;
+	width: 18px;
+}
+
+.quantityChoice .quantityDecrement {
+	text-align: right;
+}
+
+.quantityChoice .quantityIncrement {
+	text-align: left;
+}
+
+.quantityChoice .quantityNumber {
+	text-align: center;
+}
+
+.sectionDescription {
+	margin: 16px;
+}
+
+.sectionHeading {
+	border-bottom: 3px solid black;
+	font-size: 28px;
+	font-variant: small-caps;
+	margin: 16px 16px 0;
+	padding-bottom: 12px;
+	text-align: center;
+}
+
+.templateContainer {
+	display: none;
+}
+
+#accountPage #accountActions {
+	margin: 16px;
+}
+
+#accountPage #accountActions a {
+	color: Black;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#accountPage #accountActions a:hover {
+	text-decoration: underline;
+}
+
+#accountPage #detailsList {
+	margin: 16px;
+	padding: 0;
+}
+
+#accountPage #detailsList li {
+	list-style-type: none;
+}
+
+#choicesOverlay {
+	display: none;
+	height: 100vh;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 1;
+}
+
+#choicesOverlay.active {
+	display: block;
+}
+
+#notificationOverlay {
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	height: 100vh;
+	left: 0;
+	max-width: 100%;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 100vw;
+	z-index: 2;
+}
+
+#notificationOverlay.active {
+	display: block;
+}
+
+#notificationOverlay .notification {
+	cursor: default;
+	display: none;
+	left: 50%;
+	max-width: 500px;
+	padding: 0 16px;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#notificationOverlay .notification.active {
+	display: block;
+}
+
+#notificationOverlay .notification.glass {
+	background-image: url("/images/glassfloating.png");
+	background-image: linear-gradient(to bottom right, rgba(228, 228, 228, 1) 30%, rgba(154, 154, 154, 1) 100%);
+}
+
+#pizzaDesigner {
+	max-width: 95.8333%;/*The size of 23-24 as defined by Pure grids.*/
+	text-align: center;
+	width: 536px;/*The maximum width of the canvas element plus its padding.*/
+}
+
+#pizzaDesigner h3 {
+	margin-top: 0;
+}
+
+#pizzaDesigner ul {
+	padding-left: 0;
+}
+
+#pizzaDesigner ul li {
+	list-style-type: none;
+	margin: 6px;
+}
+
+#pizzaDesigner .amountList {
+	margin-top: -1px;
+}
+
+#pizzaDesigner .amountList .amountOption {
+	display: inline-block;
+	margin: 1px;
+	width: auto;
+}
+
+#pizzaDesigner .amountList#sauceAmountsList {
+	margin-bottom: 12px;
+}
+
+#pizzaDesigner .optionBlock {
+	display: inline-block;
+	margin: 16px;
+	vertical-align: top;
+}
+
+#pizzaDesigner .optionBlock .disabled, #pizzaDesigner .optionBlock .disabledUntilLoaded {
+	border-color: rgba(0, 0, 0, 0.5);
+	cursor: default;
+	opacity: 0.5;
+}
+
+#pizzaDesigner .optionBlock .selected {
+	border-color: #00FF00;
+}
+
+#pizzaDesigner .pizzaOption, #pizzaDesigner .toppingSelector {
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 3.5px 10px;
+}
+
+#pizzaDesigner .toppingOption {
+	margin-right: 102px;
+	position: relative;
+}
+
+#pizzaDesigner .toppingOption .sideSelection {
+	border: 1px solid black;
+	border-radius: 5px;
+	font-size: 0;
+	opacity: 0.3;
+	padding: 2px;
+	position: absolute;
+	right: -102px;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#pizzaDesigner .toppingOption .sideSelection .sideSelector {
+	cursor: pointer;
+	display: inline-block;
+	height: 24px;
+	position: relative;
+	width: 24px;
+}
+
+#pizzaDesigner .toppingOption .sideSelection .sideSelector.leftSide::after {
+	clip: rect(0, 13px, 24px, 0);
+	-webkit-clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+	clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+}
+
+#pizzaDesigner .toppingOption .sideSelection .sideSelector.rightSide::after {
+	clip: rect(0, 24px, 24px, 11px);
+	-webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+	clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+}
+
+#pizzaDesigner .toppingOption .sideSelection .sideSelector::after {
+	background-color: Black;
+	border-radius: 50%;
+	content: "";
+	left: 0;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+#pizzaDesigner .toppingOption .sideSelection .sideSelector.selected::after {
+	background-color: #00FF00;
+}
+
+#pizzaDesigner .toppingOption .toppingSelector {
+	display: block;
+}
+
+#pizzaDesigner .toppingOption .toppingSelector.selected ~ .sideSelection {
+	opacity: 1;
+}
+
+#pizzaDesigner #designerPages {
+	border-top: 3px solid Black;
+	margin: 6px 16px 0;
+	overflow: hidden;
+	padding: 16px calc(16px + 24px);
+	position: relative;
+	white-space: nowrap;
+}
+
+#pizzaDesigner #designerPages .designerPage {
+	display: inline-block;
+	left: -100%;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	transition: 350ms ease-in-out;
+	transition-property: left,opacity;
+}
+
+#pizzaDesigner #designerPages .designerPage.active {
+	left: 50%;
+	opacity: 1;
+	transition-timing-function: ease-out;
+}
+
+#pizzaDesigner #designerPages .designerPage.active ~ .designerPage {
+	left: 200%;
+}
+
+#pizzaDesigner #designerPages .designerPage.widthFixed {
+	white-space: normal;
+	width: calc(100% - 80px);
+}
+
+#pizzaDesigner #designerPages .pageChangeControl {
+	display: block;
+	font-size: 24px;
+	opacity: 0.7;
+	position: absolute;
+	top: 50%;
+	text-align: center;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 24px;
+	z-index: 1;
+}
+
+#pizzaDesigner #designerPages .pageChangeControl:hover {
+	opacity: 1;
+}
+
+#pizzaDesigner #designerPages .pageChangeControl.disabled {
+	cursor: default;
+	opacity: 0.3;
+}
+
+#pizzaDesigner #designerPages .pageChangeControl.nextControl {
+	right: 0;
+}
+
+#pizzaDesigner #designerPages .pageChangeControl.previousControl {
+	left: 0;
+}
+
+#pizzaDesigner #designerPages #orderPage {
+	padding-bottom: 173px;
+	width: calc(100% - 80px);
+}
+
+#pizzaDesigner #designerPages #orderPage .orderButton {
+	left: 50%;
+	-ms-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+#pizzaDesigner #designerPages #orderPage .orderButton.disabled {
+	cursor: default;
+	opacity: 0.3;
+}
+
+#pizzaDesigner #designerPages #orderPage #pizzaDescription {
+	white-space: normal;
+}
+
+#pizzaDesigner #pizzaToppingCounters {
+	font-weight: bold;
+	height: 19px;
+	margin: 0 16px;
+}
+
+#pizzaDesigner #pizzaToppingCounters #leftToppingCounter {
+	float: left;
+}
+
+#pizzaDesigner #pizzaToppingCounters #rightToppingCounter {
+	float: right;
+}
+
+#pizzaDesigner #pizzaVisualizer {
+	display: block;
+	margin: auto;
+	max-width: 100%;
+	padding: 0 16px 16px;
+	position: relative;
+}
+
+#pizzaDesigner #pizzaVisualizer.disabled {
+	height: 0;
+	width: calc(500px + 32px);
+}
+
+#pizzaDesigner #pizzaVisualizer.disabled ~ #designerPages {
+	border-top: 0;
+}
+
+#pizzaMenu section > * {
+	text-align: center;
+}
+
+#pizzaMenu .itemBlock {
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+	position: relative;
+}
+
+#pizzaMenu .itemBlock .itemDescription {
+	margin-bottom: calc(16px + 25px);
+}
+
+#pizzaMenu .itemBlock .itemName {
+	font-size: 20px;
+	font-variant: small-caps;
+	margin-top: 10px;
+}
+
+#pizzaMenu .itemBlock .orderButton {
+	bottom: 16px;
+	left: 50%;
+	-ms-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+#pizzaMenu .listBlock .itemList {
+	margin: 0;
+}
+
+#pizzaMenu .listBlock .itemList .menuItem {
+	padding: 3px calc(16px + 73px) 3px 0;
+}
+
+#pizzaMenu .listBlock .itemList .menuItem .itemName {
+	margin: 0;
+}
+
+#pizzaMenu .listBlock .itemList .menuItem .orderButton {
+	right: 0;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#pizzaMenu .listBlock .itemList .menuItem:last-child {
+	margin-bottom: 2px;
+}
+
+#pizzaMenu .listBlock .itemList .menuItem + .menuItem {
+	margin-top: 4px;
+}
+
+#pizzaMenu .listBlock .listName {
+	margin: 0 0 16px;
+}
+
+#pizzaMenu .menuBlock {
+	margin: 1%;
+	padding: 16px;
+	vertical-align: top;
+}
+
+#pizzaMenu .menuBlock ul {
+	padding-left: 0;
+	text-align: left;
+}
+
+#pizzaMenu .menuBlock ul li {
+	list-style-type: none;
+	position: relative;
+}
+
+#pizzaMenu .menuBlock #designStartButton {
+	bottom: 16px;
+	color: black;
+	font-size: 16px;
+	font-weight: 400;
+	left: 50%;
+	padding: 1px 5px;
+	text-decoration: none;
+	-ms-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+#pizzaMenu .menuBlock.listBlock {
+	padding-bottom: 74px;
+}
+
+@media screen and (min-width: 38em) {
+	#pizzaMenu .itemBlock {
+		display: inline-block;
+		width: 48%;
+	}
+	
+	#pizzaMenu .listBlock {
+		display: inline-block;
+		width: 48%;
+	}
+}
+
+@media screen and (max-width: 64em) {
+	#pizzaMenu .listBlock .itemChoices {
+		right: -20px;
+		-ms-transform: none;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+@media screen and (min-width: 101em) {
+	#pizzaMenu .itemBlock {
+		width: 31.33%;
+	}
+	
+	#pizzaMenu .listBlock {
+		width: 31.33%;
+	}
+}
+
+#pizzaNav {
+	margin: 10px 0;
+}
+
+#pizzaNav a {
+	color: Black;
+	display: inline-block;
+	font-size: 24px;
+	margin: 0 10px;
+	text-decoration: none;
+}
+
+#pizzaNav a:hover {
+	text-decoration: underline;
+}
+
+#sidebarCartControl {
+	display: inline-block;
+	margin: 6px 0 16px;
+}
+
+#sidebarCartControl #cartLabel, #sidebarCartControl #cartLabel #labelText {
+	font-size: 24px;
+}
+
+#sidebarCartControl #cartLabel #cartCounter {
+	font-size: 22px;
+}
+
+#sidebarCartControl #cartLabel:hover #labelText {
+	text-decoration: underline;
+}
+
+#sidebarCartControl.active #sidebarCart {
+	right: 0;
+	transition-timing-function: ease-out;
+}
+
+#sidebarCartControl.disabled #cartCounter {
+	display: none;
+}
+
+#sidebarCartControl.disabled #cartLabel {
+	cursor: default;
+	opacity: 0.33;
+}
+
+#sidebarCartControl.disabled #cartLabel:hover #labelText {
+	text-decoration: none;
+}

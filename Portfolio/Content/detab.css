@@ -1,0 +1,35 @@
+body {
+	font-size: 0;
+}
+
+address, abbr, article, aside, audio, b, bdi, bdo, blockquote, br, button, canvas, caption, cite, code, dd, del, dfn, dialog, dt, em, embed, h4, i, input, ins, kbd, label, legend, li, meter, map, mark, menuitem, noscript, object, option, output, p, param, pre, q, rp, rt, s, samp, select, span, strong, summary, textarea, td, th, time, var, .detab-textContainer {
+	font-size: 16px;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 18.72px;
+}
+
+h5 {
+	font-size: 13.28px;
+}
+
+h6 {
+	font-size: 10.72px;
+}
+
+small {
+	font-size: 12.8px;
+}
+
+sub, sup {
+	font-size: 13px;
+}

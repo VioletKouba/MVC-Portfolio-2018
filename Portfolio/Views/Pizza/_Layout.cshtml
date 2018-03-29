@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.SectionName - @ViewBag.PageName</title>
+	@Styles.Render("~/Content/portfolio")
+	<link rel="stylesheet" type="text/css" href="/Content/pizza.css">
+	@if (ViewBag.PageStyles != null) { foreach (string style in ViewBag.PageStyles) {<link rel="stylesheet" type="text/css" href=@style>} }
+	@Scripts.Render("~/Scripts/portfolio")
+	<script id="jsonMenuData" type="application/json">@Html.Action("MenuData")</script>
+	<script src="/Scripts/lz4.min.js"></script>
+	<script src="/Scripts/pizzaCore.js"></script>
+	<script src="/Scripts/pizzaCart.js"></script>
+	@if (ViewBag.PageScripts != null) { foreach (string script in ViewBag.PageScripts) {<script src=@script></script>} }
+</head>
+<body>
+	@Html.Partial("~/Views/Shared/_NoScript.cshtml")
+	@Html.Partial("~/Views/Shared/_SiteNav.cshtml")
+	<div id="notificationOverlay">
+		@helper GenerateNotification(Portfolio.Models.NotificationModel model) {@Html.Partial("~/Views/Pizza/_Notification.cshtml", model);}
+		@GenerateNotification(new Portfolio.Models.NotificationModel {
+			ID = "cartChanged",
+			Text = "We detected that your cart was updated on another page, and have loaded the latest version. Please repeat the change you were attempting to make."
+		})
+		@GenerateNotification(new Portfolio.Models.NotificationModel {
+			ID = "invalidPromoCode",
+			Text = "We're sorry, your promotional code is either incorrect or has been deactivated."
+		})
+		@GenerateNotification(new Portfolio.Models.NotificationModel {
+			ID = "noQualifyingItems",
+			Text = "We're sorry, the items in your cart don't qualify for this promotion. Please add the necessary items first or try a different code."
+		})
+		@GenerateNotification(new Portfolio.Models.NotificationModel {
+			ID = "invalidUid",
+			Text = "We're sorry, the cart or item you were trying to edit no longer exists. You may be on a page from an expired session, or have edited your cart since loading the page."
+		})
+		@GenerateNotification(new Portfolio.Models.NotificationModel {
+			ID = "noChanges",
+			Text = "We're sorry, the attempted edit to your order item found that the new options are identical to the existing ones. No change has been made to your cart."
+		})
+		@if (ViewBag.PageNotifications != null) {foreach (Portfolio.Models.NotificationModel notification in ViewBag.PageNotifications) {@GenerateNotification(notification);}}
+	</div>
+	<header class="pure-g">
+		<section class="@Global.PureClasses glass">
+			<h1>@ViewBag.SectionName</h1>
+			<nav id="pizzaNav">
+				@Html.ActionLink("Home", "Home", "Pizza")
+				@Html.ActionLink("Menu", "Menu", "Pizza")
+				@Html.ActionLink("Account", "Account", "Pizza")
+			</nav>
+			@if (ViewBag.PageName != "Cart") {@Html.Action("_CartWidget", "Pizza");}
+		</section>
+	</header>
+	@RenderBody()
+	<footer class="pure-g">
+		<section class="@Global.PureClasses glass">
+			<h5>This website is for demonstration purposes only and has no affiliation with any actual business. No real transactions will occur.</h5>
+		</section>
+	</footer>
+</body>
+</html>
