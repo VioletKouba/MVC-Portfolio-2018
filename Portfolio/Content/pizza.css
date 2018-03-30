@@ -845,14 +845,6 @@ main .glass {
 	white-space: normal;
 }
 
-#pizzaDesigner #loadingBar {
-
-}
-
-#pizzaDesigner #loadingBar #loadingProgress {
-	height: 100%;
-}
-
 #pizzaDesigner #pizzaStatusDisplay {
 	font-weight: bold;
 	height: 19px;
