@@ -845,17 +845,37 @@ main .glass {
 	white-space: normal;
 }
 
-#pizzaDesigner #pizzaToppingCounters {
+#pizzaDesigner #loadingBar {
+
+}
+
+#pizzaDesigner #loadingBar #loadingProgress {
+	height: 100%;
+}
+
+#pizzaDesigner #pizzaStatusDisplay {
 	font-weight: bold;
 	height: 19px;
 	margin: 0 16px;
 }
 
-#pizzaDesigner #pizzaToppingCounters #leftToppingCounter {
+#pizzaDesigner #pizzaStatusDisplay #imagesLoadedCounter {
+	display: none;
+}
+
+#pizzaDesigner #pizzaStatusDisplay #imagesLoadedCounter.loading {
+	display: inline;
+}
+
+#pizzaDesigner #pizzaStatusDisplay #imagesLoadedCounter.loading ~ .toppingCounter {
+	display: none;
+}
+
+#pizzaDesigner #pizzaStatusDisplay #leftToppingCounter {
 	float: left;
 }
 
-#pizzaDesigner #pizzaToppingCounters #rightToppingCounter {
+#pizzaDesigner #pizzaStatusDisplay #rightToppingCounter {
 	float: right;
 }
 

@@ -3,6 +3,9 @@ $(document).ready(function() {
 	var LZ4 = require("lz4");
 	var encoding = "base64";
 
+	var cartExpiryTime = (3 * 24 * 60 * 60 * 1000);
+	var maxSafeInteger = 9007199254740991;//Defined here as IE11 does not have the Number.MAX_SAFE_INTEGER constant.
+
 	var lastCartState;
 	var cart;
 	
@@ -56,20 +59,34 @@ $(document).ready(function() {
 	}
 
 	function loadCart(storedCartState) {
-		if(storedCartState) {
-			lastCartState = storedCartState;
-			cart = decompressJSON(storedCartState, localStorage.getItem("compressedLength"));
-		}
-		else {
-			lastCartState = null;
-			cart = {
+		function newCart() {
+			return {
 				"items": [],
 				"itemCounter": 0,
 				"promoCodes": [],
-				"uid": Math.floor(Math.random() * 9007199254740991).toString(36),/*The maximum safe integer value, as Number.MAX_SAFE_INTEGER is undefined in IE11.*/
-				"expires": Date.now() + 259200000,
+				"uid": Math.floor(Math.random() * maxSafeInteger).toString(36),
+				"expires": Date.now() + cartExpiryTime,
 				"active": false
-			};
+			}
+		}
+
+		if(storedCartState) {
+			var storedCart = decompressJSON(storedCartState, localStorage.getItem("compressedLength"));
+
+			if(Date.now() > storedCart.expires) {
+				localStorage.removeItem("pizzaCart");
+				localStorage.removeItem("compressedLength");
+				lastCartState = null;
+				cart = newCart();
+			}
+			else {
+				lastCartState = storedCartState;
+				cart = storedCart;
+			}
+		}
+		else {
+			lastCartState = null;
+			cart = newCart();
 		}
 		updateCart();
 	}
@@ -77,19 +94,14 @@ $(document).ready(function() {
 	function saveCart() {
 		var storedCartState = localStorage.getItem("pizzaCart");
 
-		if (storedCartState == lastCartState) {
-			if (cart.items.length > 0) {
-				var compressedCart = compressJSON(cart);
+		if(storedCartState == lastCartState) {
+			cart.expires = Date.now() + cartExpiryTime;
 
-				localStorage.setItem("pizzaCart", compressedCart.compressedString);
-				localStorage.setItem("compressedLength", compressedCart.compressedLength);
-				lastCartState = localStorage.getItem("pizzaCart");
-			}
-			else {
-				localStorage.removeItem("pizzaCart");
-				localStorage.removeItem("compressedLength");
-				lastCartState = null;
-			}
+			var compressedCart = compressJSON(cart);
+
+			localStorage.setItem("pizzaCart", compressedCart.compressedString);
+			localStorage.setItem("compressedLength", compressedCart.compressedLength);
+			lastCartState = localStorage.getItem("pizzaCart");
 		}
 		else {
 			notifyUser("cartUpdated");
@@ -339,6 +351,11 @@ $(document).ready(function() {
 			$pageCart.find(".sectionDescription").removeClass("shown");
 		}
 		else {
+			if(cart.active) {
+				cart.active = false;
+				cartUpdated = true;
+			}
+
 			$sidebarCartControl.removeClass("active").addClass("disabled");
 			$pageCart.find(".sectionDescription").addClass("shown");
 		}
@@ -487,7 +504,7 @@ $(document).ready(function() {
 	if($bothCarts.length > 0) {
 		loadCart(localStorage.getItem("pizzaCart"));
 		$sidebarCartControl.find("#cartLabel, #closeSidebar").click(toggleSidebar);
-		if (cart.active) {
+		if (cart.active && cart.items.length > 0) {
 			$sidebarCart.one("transitionend", enableTransition);
 			$sidebarCartControl.addClass("active");
 		}

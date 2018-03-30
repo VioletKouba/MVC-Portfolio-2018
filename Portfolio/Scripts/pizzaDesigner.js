@@ -596,6 +596,7 @@ $(document).ready(function() {
 	}
 	
 	function unlockAfterLoading() {
+		$pizzaDesigner.find("#imagesLoadedCounter").removeClass("loading");
 		visualizePizza();
 		$pizzaDesigner.find(".pizzaOption,.toppingSelector,.sideSelector").removeClass("disabledUntilLoaded").click(updatePizza).mousedown(preventDefault);
 		editing = loadOptions();
@@ -608,6 +609,7 @@ $(document).ready(function() {
 
 				function incrementLoadCount() {
 					imagesLoaded++;
+					$pizzaDesigner.find("#imagesLoadedCount").text(imagesLoaded);
 					if(imagesLoaded == imageCount) unlockAfterLoading();
 				}
 
@@ -632,6 +634,7 @@ $(document).ready(function() {
 		}
 
 		$.each(categoryData, searchOptions);
+		$pizzaDesigner.find("#imageTotalCount").text(imageCount).parent("#imagesLoadedCounter").removeClass("hiddenContents");
 	}
 
 	function fixDesignerPageSizes() {
