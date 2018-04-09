@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Portfolio.Helpers;
 using Portfolio.Models;
 
 namespace Portfolio.Controllers
@@ -145,6 +146,7 @@ namespace Portfolio.Controllers
 					helper.user.PhoneExtension = model.PhoneExtension;
 					helper.user.Country = model.Country;
 					helper.user.StreetAddress = model.StreetAddress;
+					helper.user.ApartmentNumber = model.ApartmentNumber;
 					helper.user.City = model.City;
 					helper.user.State = model.State;
 					helper.user.ZipCode = model.ZipCode;

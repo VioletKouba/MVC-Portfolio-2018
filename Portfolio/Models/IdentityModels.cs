@@ -39,24 +39,13 @@ namespace Portfolio.Models
 
 	public class PizzaDbContext : IdentityDbContext<PizzaUser>
 	{
-		public PizzaDbContext() : base("DefaultConnection", throwIfV1Schema: false) { }
+		static PizzaDbContext()
+		{
+			Database.SetInitializer(new Helpers.MySqlEntityHelper.MySqlInitializer());
+		}
+
+		public PizzaDbContext() : base("DefaultConnection") { }
 
 		public static PizzaDbContext Create() { return new PizzaDbContext(); }
-	}
-
-	public class UserHelper
-	{
-		public PizzaDbContext db;
-		public UserStore<PizzaUser> store;
-		public UserManager<PizzaUser> manager;
-		public PizzaUser user;
-
-		public UserHelper(string userId)
-		{
-			db = new PizzaDbContext();
-			store = new UserStore<PizzaUser>(db);
-			manager = new UserManager<PizzaUser>(store);
-			user = manager.FindById(userId);
-		}
 	}
 }
