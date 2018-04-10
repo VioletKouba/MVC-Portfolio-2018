@@ -49,7 +49,7 @@
 				@Html.ActionLink("Menu", "Menu", "Pizza")
 				@Html.ActionLink("Account", "Account", "Pizza")
 			</nav>
-			@if (ViewBag.PageName != "Cart") {@Html.Action("_CartWidget", "Pizza");}
+			@if (ViewBag.PageName != "Cart" && ViewBag.PageName != "Thank You") {@Html.Action("_CartWidget", "Pizza");}
 		</section>
 	</header>
 	@RenderBody()
