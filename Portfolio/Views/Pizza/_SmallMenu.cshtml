@@ -1,7 +1,8 @@
-﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData>
+﻿@model KeyValuePair<string, MenuDataModel.MenuData>
 <div class="glass menuBlock listBlock" id="@Model.Value.Name">
 	<h2 class="menuHeading listName">@Model.Value.Name</h2>
 	<ul class="itemList">
-		@foreach (KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData> MenuItem in Model.Value.Items) {@Html.Partial("~/Views/Pizza/_SmallMenuItem.cshtml", MenuItem)}
+		@foreach (KeyValuePair<string, Portfolio.Models.PizzaViewModels.MenuDataModel.MenuData.MenuItemData> MenuItem in Model.Value.Items)
+		{@Html.Partial("~/Views/Pizza/_SmallMenuItem.cshtml", MenuItem)}
 	</ul>
 </div>

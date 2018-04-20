@@ -1,19 +1,21 @@
-﻿@model Portfolio.Models.LoginModel
+﻿@model LoginModel
 @{
 	ViewBag.PageName = "Log In";
-	ViewBag.PageScripts = new string[] { "/Scripts/sha256.js", "/Scripts/hashPasswords.js" };
+	ViewBag.PageScripts = new string[] { "/js/hashPasswords.min.js" };
 }
 <main class="pure-g">
-	<section class="@Global.PureClasses glass">
+	<section class="@ViewBag.PureClasses glass">
 		@{
-			if(Model != null && Model.LockedOut == true) {
+			if (Model != null && Model.LockedOut == true)
+			{
 				<h2 class="sectionHeading">Locked Out</h2>
 				<p>For your security, your account has been temporarily locked after too many failed login attempts. Please try again later.</p>
 			}
-			else {
+			else
+			{
 				<h2 class="sectionHeading">@ViewBag.PageName</h2>
 				<p class="sectionDescription">Already have a @ViewBag.SectionName account? Log in here! If you don't, why not @Html.ActionLink("register for one", "Register", "Pizza") today?</p>
-				using (Html.BeginForm("Login", "Pizza", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "hashedPasswords" }))
+				using (Html.BeginForm("Login", "Pizza", FormMethod.Post, new { @class = "hashedPasswords" }))
 				{
 					@Html.AntiForgeryToken()
 					@Html.ValidationSummary(true, "")
@@ -37,10 +39,10 @@
 							@Html.CheckBoxFor(m => m.RememberUser)
 						</div>
 					</div>
-					<br/>
+					<br />
 					<div class="formBlock">
 						<div class="inputBlock">
-							<input type="submit" value="Log In"/>
+							<input type="submit" value="Log In" />
 						</div>
 					</div>
 				}

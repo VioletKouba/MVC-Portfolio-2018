@@ -1,9 +1,12 @@
-﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData>
+﻿@model KeyValuePair<string, MenuDataModel.MenuData.MenuItemData>
 <div class="menuBlock itemBlock menuItem" id="@Model.Key">
 	<h3 class="itemName">@Model.Value.Name</h3>
 	<p class="itemDescription">@Model.Value.Description</p>
 	@{
-		if (Model.Key == "designYourOwn") {<a id="designStartButton" href="/Pizza/Designer">Start Now</a>}
-		else {@Html.Partial("~/Views/Pizza/_OrderButton.cshtml", Model.Value);}
+		if (Model.Key == "designYourOwn")
+		{<a id="designStartButton" href="/Pizza/Designer">Start Now</a>}
+		else
+		{@Html.Partial("~/Views/Pizza/_OrderButton.cshtml", Model.Value);
+	}
 	}
 </div>

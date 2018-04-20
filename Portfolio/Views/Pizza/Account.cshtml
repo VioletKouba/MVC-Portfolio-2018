@@ -1,28 +1,28 @@
-﻿@model Portfolio.Models.PizzaUser
+﻿@model PizzaUser
 @{
 	ViewBag.PageName = "Your Account";
 }
 <main class="pure-g" id="accountPage">
-	<section class="@Global.PureClasses glass">
+	<section class="@ViewBag.PureClasses glass">
 		<h2 class="sectionHeading">@ViewBag.PageName</h2>
 		<p class="sectionDescription">Welcome back! On this page you can view and manage your account details.</p>
 		<nav class="detab-textContainer" id="accountActions">
 			@Html.ActionLink("Change Your Password", "ChangePassword", "Pizza")
-			<br/>
+			<br />
 			@Html.ActionLink("Change Account Details", "ChangeDetails", "Pizza")
-			<br/>
+			<br />
 			@Html.ActionLink("Log Out", "Logout", "Pizza")
 		</nav>
 	</section>
-	<section class="@Global.PureClasses glass">
+	<section class="@ViewBag.PureClasses glass">
 		<h2 class="sectionHeading">Account Details</h2>
 		<ul id="detailsList">
 			<li>Email address: <b>@Model.Email</b></li>
 			<li>Receives promotional emails: <b>@(Model.ReceivesEmails ? "Yes" : "No")</b></li>
 			<li>First name: <b>@Model.FirstName</b></li>
 			<li>Last name: <b>@Model.LastName</b></li>
-			<li>Phone number: <b>@Model.PhoneNumber @if(Model.PhoneExtension != null) {@("Ext. " + Model.PhoneExtension)}</b></li>
-			<li>Street address: <b>@Model.StreetAddress @if(Model.ApartmentNumber != null) {@("Apt. " + Model.ApartmentNumber)}</b></li>
+			<li>Phone number: <b>@Model.PhoneNumber @if (Model.PhoneExtension != null) { @("Ext. " + Model.PhoneExtension) }</b></li>
+			<li>Street address: <b>@Model.StreetAddress @if (Model.ApartmentNumber != null)	{ @("Apt. " + Model.ApartmentNumber) }</b></li>
 			<li>City: <b>@Model.City</b></li>
 			<li>State: <b>@Model.State</b></li>
 			<li>Country: <b>@Model.Country</b></li>

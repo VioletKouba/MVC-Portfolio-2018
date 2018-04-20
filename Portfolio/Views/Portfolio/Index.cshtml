@@ -1,33 +1,28 @@
 ﻿@{ViewBag.PageName = "Index";}
-<header class="pure-g">
-	<section class="@Global.PureClasses">
-		<h1 class="entersFromLeft">Portfolio Index</h1>
-	</section>
-</header>
 <main class="pure-g">
-	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new Portfolio.Models.CardModel {
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
 		Title = "Welcome",
 		Text = "This is my portfolio site. From the navigation sidebar, you can view an example of the kind of work I can do in the form of a website for a fictitious pizza restaurant, while on this page I've prepared a short list of my qualifications. Additionally, a copy of the source code for this site is available on GitHub and also accessible from the sidebar. I hope that you will consider me for your web development needs!"
 	})
-	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new Portfolio.Models.CardModel {
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
 		Title = "Primary Qualifications",
 		Text = "I have extensively researched and utilized HTML, CSS, JavaScript, and jQuery in the course of both study and numerous personal projects undergone to improve my skills. In addition, I have also worked with C# and ASP.NET, specifically Razor and MVC, as well as Pure Grids. All of these can be seen in use throughout my portfolio. The core of web development is my strongest point, and I am very confident that if I am given work focused on these areas, I can provide results that will exceed your expectations."
 	})
-	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new Portfolio.Models.CardModel {
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
 		Title = "Secondary Qualifications",
 		Text = "In addition to my core strengths, I also have less comprehensive but still meaningful experience with Electron and Node.js. Because I've worked with JavaScript so extensively, I can learn most things based on it very quickly."
 	})
-	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new Portfolio.Models.CardModel {
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
 		Title = "Other Development Experience",
 		Text = "Furthermore, I have spent time studying the basics of PHP, Sass, and SQL, both out of personal curiosity and to diversify myself. My experience with these is minimal, but should my work involve them, I recognize their syntax enough to generally follow what's happening and independently research any aspects I'm not familiar with."
 	})
-	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new Portfolio.Models.CardModel {
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
 		Title = "How I Stand Out as a Developer",
 		Text = "In the course of learning web development, I was fortunate enough to have the oversight of a talented senior web dev, but for the most part my study and projects were self-directed. As such, rather than learning how to accomplish common tasks by rote repetition, I set to thoroughly researching website functionality and the various properties and methods of my primary language focuses. My generalized, try-everything approach has left me with a wide spectrum of familiarity and, more importantly, the ability to efficiently research further in any direction expected of me, creating new qualifications as I go. With access to sufficient documentation, I can acquire new skills as needed for the project I'm working on, and I am likewise experienced in fixing any bugs or unexpected behaviors that arise, even if I haven't seen them before. In short, my biggest qualifications are adaptability and the capacity for efficiently-directed growth."
 	})
 </main>
-<footer class="pure-g">
-	<section class="@Global.PureClasses">
-		<h5 class="entersFromLeft">This page uses the Google Font <a href="https://fonts.google.com/specimen/Roboto">Roboto</a>, and an aesthetic inspired by <a href="https://material.io/">Material Design</a>.</h5>
-	</section>
-</footer>

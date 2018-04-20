@@ -1,8 +1,7 @@
-﻿@model Portfolio.Models.MenuDataModel
-@{
+﻿@{
 	ViewBag.PageName = "Cart";
-	ViewBag.PageNotifications = new Portfolio.Models.NotificationModel[] {
-		new Portfolio.Models.NotificationModel {
+	ViewBag.PageNotifications = new NotificationModel[] {
+		new NotificationModel {
 			ID = "duplicatePromoCode",
 			Text = "We're sorry, the code you entered is already applied to your order. Please double check the code you entered."
 		}
@@ -47,7 +46,7 @@
 			</div>
 		</li>
 	</div>
-	<section class="@Global.PureClasses glass">
+	<section class="@ViewBag.PureClasses glass">
 		<h2 class="sectionHeading">Your Cart</h2>
 		<p class="hiddenContents sectionDescription shown">Your cart doesn't currently have any items in it. Why not take a look at our <a href="@Url.Action("Menu", "Pizza")">menu</a> and change that?</p>
 		<ul class="itemList"></ul>

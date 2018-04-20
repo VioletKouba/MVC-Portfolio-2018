@@ -1,35 +1,36 @@
 ﻿@{
 	ViewBag.PageName = "Home";
-	ViewBag.PageStyles = new string[] {"/Content/carousel.css"};
-	ViewBag.PageScripts = new string[] {"/Scripts/carousel.js"};
+	ViewBag.PageStyles = new string[] { "/css/carousel.css" };
+	ViewBag.PageScripts = new string[] { "/js/carousel.js" };
 }
 <main class="pure-g">
-	<section class="@Global.PureClasses">
-		@Html.Partial("~/Views/Shared/_Carousel.cshtml", new Portfolio.Models.CarouselModel {
+	<section class="@ViewBag.PureClasses">
+		@Html.Partial("~/Views/Shared/_Carousel.cshtml", new CarouselModel
+		{
 			Automatic = true,
 			AutomaticDelay = 3000,
 			DelayedResume = true,
 			ResumeDelay = 20000,
-			Items = new List<Portfolio.Models.CarouselItemModel> {
-				new Portfolio.Models.CarouselItemModel {
-					URL = Url.Action("Menu", "Pizza") + "#signatureThinCrust",
-					Background = "url(/images/signaturethincrust.jpg)",
-					Caption = "Signature Thin Crust"
-				},
-				new Portfolio.Models.CarouselItemModel {
-					URL = Url.Action("Menu", "Pizza") + "#mediterraneanGardenStyle",
-					Background = "url(/images/mediterraneangardenstyle.jpg)",
-					Caption = "Mediterranean Garden Style"
-				},
-				new Portfolio.Models.CarouselItemModel {
-					URL = Url.Action("Menu", "Pizza") + "#savoryStuffedCrust",
-					Background = "url(/images/savorystuffedcrust.jpg)",
-					Caption = "Savory Stuffed Crust"
-				}
-		   }
-	   })
+			Items = new List<CarouselItemModel> {
+			new CarouselItemModel {
+				URL = Url.Action("Menu", "Pizza") + "#signatureThinCrust",
+				Background = "url(/images/signaturethincrust.jpg)",
+				Caption = "Signature Thin Crust"
+			},
+			new CarouselItemModel {
+				URL = Url.Action("Menu", "Pizza") + "#mediterraneanGardenStyle",
+				Background = "url(/images/mediterraneangardenstyle.jpg)",
+				Caption = "Mediterranean Garden Style"
+			},
+			new CarouselItemModel {
+				URL = Url.Action("Menu", "Pizza") + "#savoryStuffedCrust",
+				Background = "url(/images/savorystuffedcrust.jpg)",
+				Caption = "Savory Stuffed Crust"
+			}
+	   }
+		})
 	</section>
-	<section class="@Global.PureClasses">
+	<section class="@ViewBag.PureClasses">
 		<div class="column" id="informationColumn">
 			<div class="columnItem glass">
 				<h3>Pasta Dishes Now Available</h3>

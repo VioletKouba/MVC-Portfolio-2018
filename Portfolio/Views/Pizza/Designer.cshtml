@@ -1,40 +1,47 @@
-﻿@using Option = System.Collections.Generic.KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData.OptionsData.OptionData>
-@model Portfolio.Models.MenuDataModel
+﻿@using Option = System.Collections.Generic.KeyValuePair<string, Portfolio.Models.PizzaViewModels.MenuDataModel.MenuData.MenuItemData.OptionsData.OptionData>
+@model MenuDataModel
+@functions {
+	Microsoft.AspNetCore.Html.HtmlString GenerateOptionListing(string ExtraClasses, Option PizzaOption) {
+		string rawString = String.Format("<li class=\"userControl pizzaOption {0}\" id=\"{1}\">{2}</li>", ExtraClasses, PizzaOption.Key, PizzaOption.Value.Name);
+
+		return new Microsoft.AspNetCore.Html.HtmlString(rawString);
+	}
+}
 @{
 	ViewBag.PageName = "Designer";
-	ViewBag.PageScripts = new string[] {"/Scripts/pizzaDesigner.js"};
-	ViewBag.PageNotifications = new Portfolio.Models.NotificationModel[] {
-		new Portfolio.Models.NotificationModel {
+	ViewBag.PageScripts = new string[] { "/js/pizzaDesigner.js" };
+		ViewBag.PageNotifications = new NotificationModel[] {
+		new NotificationModel {
 			ID = "glutenFreeDisclaimer",
 			Text = "Note: " + ViewBag.SectionName + " doesn't recommend our gluten free crust for individuals with gluten allergies/sensitivities, as the pizza will still be prepared in the same kitchen as our gluten-containing products."
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "fiveToppings",
 			Text = "We recommend five toppings or less per side to ensure that your pizza will be cooked to perfection."
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "tenToppings",
 			Text = "More than ten toppings on one side will prevent your pizza from cooking evenly. Please select fewer toppings or move them to different sides."
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "imageError",
 			Text = "We're sorry, not all of the images for our Pizza Visualizer loaded successfully. Please refresh the page and try again. If the issue persists, you can still design your pizza without the visuals!"
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "tooManyLoops",
 			Text = "We're sorry, something in our script got stuck. Please refresh the page and try again."
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "invalidOption",
 			Text = "We're sorry, you seem to have chosen an option we don't have available. Please refresh the page and try again."
 		},
-		new Portfolio.Models.NotificationModel {
+		new NotificationModel {
 			ID = "invalidState",
 			Text = "We're sorry, your order seems to contain invalid options. Please refresh the page and try again."
 		}
 	};
 
-	Portfolio.Models.MenuDataModel.MenuData.MenuItemData.OptionsData Options = Model.BigMenus["pizzas"].Items["designYourOwn"].Options;
+	MenuDataModel.MenuData.MenuItemData.OptionsData Options = Model.BigMenus["pizzas"].Items["designYourOwn"].Options;
 }
 <main class="pure-g">
 	<section class="pure-u glass" id="pizzaDesigner">
@@ -52,14 +59,13 @@
 				<div class="optionBlock">
 					<h3>Crust</h3>
 					<ul id="crustsList">
-						@helper GenerateOptionListing(string ExtraClasses, Option PizzaOption) {<li class="userControl pizzaOption @ExtraClasses" id="@PizzaOption.Key">@PizzaOption.Value.Name</li>}
-						@foreach (Option CrustOption in Options.Crusts) {@GenerateOptionListing("crustOption disabledUntilLoaded", CrustOption)}
+						@foreach (Option CrustOption in Options.Crusts) { @GenerateOptionListing("crustOption disabledUntilLoaded", CrustOption); }
 					</ul>
 				</div>
 				<div class="optionBlock">
 					<h3>Size</h3>
 					<ul id="sizesList">
-						@foreach (Option SizeOption in Options.Sizes) {@GenerateOptionListing("sizeOption disabled", SizeOption)}
+						@foreach (Option SizeOption in Options.Sizes) { @GenerateOptionListing("sizeOption disabled", SizeOption); }
 					</ul>
 				</div>
 			</div>
@@ -68,10 +74,12 @@
 					<h3>Sauce</h3>
 					<ul class="amountList" id="sauceAmountsList">
 						@*@foreach (Option SauceAmountOption in Options.SauceAmounts) {@GenerateOptionListing("amountOption sauceAmountOption disabledUntilLoaded", SauceAmountOption)}*@
-						@for(int i = 0; i < Options.SauceAmounts.Count; i++) {
-							if(i == 0) {@GenerateOptionListing("amountOption sauceAmountOption selected disabledUntilLoaded", Options.SauceAmounts.ElementAt(i));}
+						@for (int i = 0; i < Options.SauceAmounts.Count; i++)
+						{
+							if (i == 0) {@GenerateOptionListing("amountOption sauceAmountOption selected disabledUntilLoaded", Options.SauceAmounts.ElementAt(i));}
 							else {@GenerateOptionListing("amountOption sauceAmountOption disabledUntilLoaded", Options.SauceAmounts.ElementAt(i));}
 						}
+					}
 					</ul>
 					<ul id="saucesList">
 						@*@foreach (Option SauceOption in Options.Sauces) {@GenerateOptionListing("sauceOption disabled", SauceOption)}*@
@@ -96,7 +104,7 @@
 				<div class="optionBlock">
 					<h3>Cheese Toppings</h3>
 					<ul class="toppingList" id="cheeseToppingsList">
-						@foreach (Option CheeseToppingOption in Options.CheeseToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", CheeseToppingOption)}
+						@foreach (Option CheeseToppingOption in Options.CheeseToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", CheeseToppingOption);}
 					</ul>
 				</div>
 			</div>
@@ -104,7 +112,7 @@
 				<div class="optionBlock">
 					<h3>Vegetable Toppings</h3>
 					<ul class="toppingList" id="vegetableToppingsList">
-						@foreach (Option VegetableToppingOption in Options.VegetableToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", VegetableToppingOption)}
+						@foreach (Option VegetableToppingOption in Options.VegetableToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", VegetableToppingOption);}
 					</ul>
 				</div>
 			</div>
@@ -112,7 +120,7 @@
 				<div class="optionBlock">
 					<h3>Meat Toppings</h3>
 					<ul class="toppingList" id="meatToppingsList">
-						@foreach (Option MeatToppingOption in Options.MeatToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", MeatToppingOption)}
+						@foreach (Option MeatToppingOption in Options.MeatToppings) {@Html.Partial("~/Views/Pizza/_ToppingOption.cshtml", MeatToppingOption);}
 					</ul>
 				</div>
 			</div>

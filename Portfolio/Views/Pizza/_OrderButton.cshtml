@@ -1,13 +1,16 @@
-﻿@model Portfolio.Models.MenuDataModel.MenuData.MenuItemData
+﻿@model MenuDataModel.MenuData.MenuItemData
 <div class="userControl orderButton">
 	<span class="buttonLabel">Order</span>
 	<i class="fa fa-chevron-right stateIndicator"></i>
 	<div class="card itemChoices">
-		@if (Model.Choices != null) {
+		@if (Model.Choices != null)
+		{
 			<div class="verticalBlock">
-				@if(Model.ChoiceHeading != null) {<h4 class="choiceHeading">@Model.ChoiceHeading</h4>}
+				@if (Model.ChoiceHeading != null)
+				{<h4 class="choiceHeading">@Model.ChoiceHeading</h4>}
 				<ul class="choiceList">
-					@for(int i = 0; i < Model.Choices.Count; i++) {@Html.Partial("~/Views/Pizza/_ItemChoice.cshtml", Model.Choices.ElementAt(i), new ViewDataDictionary(this.ViewData) { {"Index", i} })}
+					@for (int i = 0; i < Model.Choices.Count; i++)
+					{@Html.Partial("~/Views/Pizza/_ItemChoice.cshtml", Model.Choices.ElementAt(i), new ViewDataDictionary(this.ViewData) { { "Index", i } })}
 				</ul>
 			</div>
 		}

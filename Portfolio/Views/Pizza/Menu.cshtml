@@ -1,16 +1,18 @@
-﻿@model Portfolio.Models.MenuDataModel
+﻿@model MenuDataModel
 @{
 	ViewBag.PageName = "Menu";
-	ViewBag.PageScripts = new string[] {"/Scripts/pizzaMenu.js"};
+	ViewBag.PageScripts = new string[] { "/js/pizzaMenu.js" };
 }
 <main class="pure-g" id="pizzaMenu">
 	<div id="choicesOverlay"></div>
-	@foreach (KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData> BigMenu in Model.BigMenus) {@Html.Partial("~/Views/Pizza/_BigMenu.cshtml", BigMenu)}
-	<section class="@Global.PureClasses" id="smallMenus">
+	@foreach (KeyValuePair<string, MenuDataModel.MenuData> BigMenu in Model.BigMenus)
+	{@Html.Partial("~/Views/Pizza/_BigMenu.cshtml", BigMenu)}
+	<section class="@ViewBag.PureClasses" id="smallMenus">
 		<div class="glass">
 			<h2 class="sectionHeading">Other Offerings</h2>
 			<p class="sectionDescription">In additional to our delicious pizza, we also have a wide variety of other delicious things that are sure to satisfy!</p>
 		</div>
-		@foreach (KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData> SmallMenu in Model.SmallMenus) {@Html.Partial("~/Views/Pizza/_SmallMenu.cshtml", SmallMenu)}
+		@foreach (KeyValuePair<string, MenuDataModel.MenuData> SmallMenu in Model.SmallMenus)
+		{@Html.Partial("~/Views/Pizza/_SmallMenu.cshtml", SmallMenu)}
 	</section>
 </main>

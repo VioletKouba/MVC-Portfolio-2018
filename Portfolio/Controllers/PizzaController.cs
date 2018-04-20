@@ -1,107 +1,83 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Portfolio.Helpers;
 using Portfolio.Models;
+using Portfolio.Models.PizzaViewModels;
 
 namespace Portfolio.Controllers
 {
-	public class PizzaController : Controller
+    public class PizzaController : Controller
 	{
-		private ApplicationSignInManager _signInManager;
-		private ApplicationUserManager _userManager;
+		private readonly UserManager<PizzaUser> _userManager;
+		private readonly SignInManager<PizzaUser> _signInManager;
 
-		public ApplicationSignInManager SignInManager
+		public PizzaController(
+			UserManager<PizzaUser> userManager,
+			SignInManager<PizzaUser> signInManager)
 		{
-			get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
-			private set { _signInManager = value; }
+			_userManager = userManager;
+			_signInManager = signInManager;
 		}
 
-		public ApplicationUserManager UserManager
+		private void AddErrors(IdentityResult result) { foreach (IdentityError error in result.Errors) { ModelState.AddModelError("", error.ToString()); } }
+
+		private string NormalizePhoneNumber(string PhoneNumber)
 		{
-			get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-			private set { _userManager = value; }
+			Regex pattern = new Regex("^\\d$");
+			string digits = "";
+
+			foreach (char character in PhoneNumber) { if (pattern.IsMatch(character.ToString())) { digits += character; } }
+
+			string areaCode = digits.Substring(0, 3);
+			string firstPart = digits.Substring(3, 3);
+			string secondPart = digits.Substring(6, 4);
+
+			return String.Format("({0}) {1}-{2}", areaCode, firstPart, secondPart);
 		}
 
-		private IAuthenticationManager AuthenticationManager
+		public IActionResult Home()
 		{
-			get { return HttpContext.GetOwinContext().Authentication; }
-		}
-
-		private void AddErrors(IdentityResult result) { foreach (var error in result.Errors) { ModelState.AddModelError("", error); } }
-
-		private MenuDataModel DeserializeMenuData()
-		{
-			ContentResult fileContent = MenuData();
-			string fileText = fileContent.Content;
-			MenuDataModel loadedModel = Newtonsoft.Json.JsonConvert.DeserializeObject<MenuDataModel>(fileText);
-
-			return loadedModel;
-		}
-
-		public static string SectionName {
-			get { return "Finley's Pizzeria"; }
-		}
-
-		public ActionResult Home()
-		{
-			ViewBag.SectionName = SectionName;
-
-			return View(DeserializeMenuData());
-		}
-
-		public ActionResult Cart()
-		{
-			ViewBag.SectionName = SectionName;
-			ViewBag.IsMainCart = true;
-
-			return View(DeserializeMenuData());
-		}
-
-		public ActionResult Designer()
-		{
-			ViewBag.SectionName = SectionName;
-
-			return View(DeserializeMenuData());
-		}
-
-		public ActionResult Menu()
-		{
-			ViewBag.SectionName = SectionName;
-
-			return View(DeserializeMenuData());
-		}
-
-		public ActionResult ThankYou()
-		{
-			ViewBag.SectionName = SectionName;
-
 			return View();
 		}
 
-		public ActionResult Account()
+		public IActionResult Cart()
 		{
-			ViewBag.SectionName = SectionName;
+			return View();
+		}
 
-			if (Request.IsAuthenticated) { return View(new UserHelper(User.Identity.GetUserId()).user); }
+		public IActionResult Designer()
+		{
+			return View(MenuDataHelper.GetAsModel());
+		}
+
+		public IActionResult Menu()
+		{
+			return View(MenuDataHelper.GetAsModel());
+		}
+
+		public IActionResult ThankYou()
+		{
+			return View();
+		}
+
+		public IActionResult Account()
+		{
+			if (_signInManager.IsSignedIn(User)) { return View(new UserHelper(_userManager.GetUserId(HttpContext.User)).user); }
 			else return RedirectToAction("Login", "Pizza");
 		}
 
-		public ActionResult ChangeDetails()
+		public IActionResult ChangeDetails()
 		{
-			ViewBag.SectionName = SectionName;
-
-			if (Request.IsAuthenticated)
+			if (_signInManager.IsSignedIn(User))
 			{
-				PizzaUser UserData = new UserHelper(User.Identity.GetUserId()).user;
+				PizzaUser UserData = new UserHelper(_userManager.GetUserId(HttpContext.User)).user;
 
 				ChangeDetailsModel model = new ChangeDetailsModel
 				{
@@ -111,7 +87,7 @@ namespace Portfolio.Controllers
 					LastName = UserData.LastName,
 					PhoneNumber = UserData.PhoneNumber,
 					PhoneExtension = UserData.PhoneExtension,
-					Country = UserData.Country,
+					/*Country = UserData.Country,*/
 					StreetAddress = UserData.StreetAddress,
 					ApartmentNumber = UserData.ApartmentNumber,
 					City = UserData.City,
@@ -125,146 +101,154 @@ namespace Portfolio.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> ChangeDetails(ChangeDetailsModel model)
+		public async Task<IActionResult> ChangeDetails(ChangeDetailsModel model)
 		{
-			ViewBag.SectionName = SectionName;
-
 			if (ModelState.IsValid)
 			{
-				if (UserManager.PasswordHasher.VerifyHashedPassword(
-					UserManager.FindById(User.Identity.GetUserId()).PasswordHash,
-					model.CurrentPasswordHash
-				).ToString() == "Success")
+				Task<PizzaUser> userLookup = _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+				userLookup.Wait();
+				if (userLookup.IsCompletedSuccessfully)
 				{
-					UserHelper helper = new UserHelper(User.Identity.GetUserId());
-
-					helper.user.Email = model.EmailAddress;
-					helper.user.ReceivesEmails = model.ReceivesEmails;
-					helper.user.FirstName = model.FirstName;
-					helper.user.LastName = model.LastName;
-					helper.user.PhoneNumber = model.PhoneNumber;
-					helper.user.PhoneExtension = model.PhoneExtension;
-					helper.user.Country = model.Country;
-					helper.user.StreetAddress = model.StreetAddress;
-					helper.user.ApartmentNumber = model.ApartmentNumber;
-					helper.user.City = model.City;
-					helper.user.State = model.State;
-					helper.user.ZipCode = model.ZipCode;
-
-					var firstResult = await helper.manager.UpdateAsync(helper.user);
-					if (firstResult.Succeeded)
+					if (_userManager.PasswordHasher.VerifyHashedPassword(
+					userLookup.Result,
+					userLookup.Result.PasswordHash,
+					model.CurrentPasswordHash
+					).ToString() == "Success")
 					{
-						bool secondResult = true;
-						try { await helper.db.SaveChangesAsync(); }
-						catch
+						UserHelper helper = new UserHelper(_userManager.GetUserId(HttpContext.User));
+
+						string normalizedEmail = model.EmailAddress.ToLower();
+
+						if (helper.user.NormalizedEmail == normalizedEmail || (await helper.manager.FindByEmailAsync(normalizedEmail)) == null)
 						{
-							ModelState.AddModelError("", "Sorry, our database failed to update. Please try again in a few minutes.");
-							secondResult = false;
+							helper.user.Email = normalizedEmail;
+							helper.user.NormalizedEmail = normalizedEmail;
+							helper.user.UserName = normalizedEmail;
+							helper.user.NormalizedUserName = normalizedEmail;
+
+							helper.user.ReceivesEmails = model.ReceivesEmails;
+							helper.user.FirstName = model.FirstName;
+							helper.user.LastName = model.LastName;
+							helper.user.PhoneNumber = NormalizePhoneNumber(model.PhoneNumber);
+							helper.user.PhoneExtension = model.PhoneExtension;
+							helper.user.Country = model.Country;
+							helper.user.StreetAddress = model.StreetAddress;
+							helper.user.ApartmentNumber = model.ApartmentNumber;
+							helper.user.City = model.City;
+							helper.user.State = model.State;
+							helper.user.ZipCode = model.ZipCode;
+
+							var firstResult = await helper.manager.UpdateAsync(helper.user);
+							if (firstResult.Succeeded)
+							{
+								bool secondResult = true;
+								try { await helper.db.SaveChangesAsync(); }
+								catch
+								{
+									ModelState.AddModelError("", "Sorry, our database failed to update. Please try again in a few minutes.");
+									secondResult = false;
+								}
+								if (secondResult) { return RedirectToAction("Account", "Pizza"); }
+							}
+							else { AddErrors(firstResult); }
 						}
-						if (secondResult) { return RedirectToAction("Account", "Pizza"); }
+						else { ModelState.AddModelError("", "The email address you entered is already registered to another account."); }
 					}
-					else { AddErrors(firstResult); }
+					else { ModelState.AddModelError("", "The password you entered is incorrect."); }
 				}
-				else { ModelState.AddModelError("", "The password you entered is incorrect."); };
+				else { ModelState.AddModelError("", userLookup.Exception.Message); }
 			}
 			return View(model);
 		}
 
-		public ActionResult ChangePassword()
+		public IActionResult ChangePassword()
 		{
-			ViewBag.SectionName = SectionName;
-
-			if (Request.IsAuthenticated) { return View(); }
+			if (_signInManager.IsSignedIn(User)) { return View(); }
 			else return RedirectToAction("Login", "Pizza");
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> ChangePassword(ChangePasswordModel model)
+		public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
 		{
-			ViewBag.SectionName = SectionName;
-
 			if (ModelState.IsValid)
 			{
-				var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.CurrentPasswordHash, model.NewPasswordHash);
-				if (result.Succeeded)
+				Task<PizzaUser> userLookup = _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+				userLookup.Wait();
+				if (userLookup.IsCompletedSuccessfully)
 				{
-					var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-					if (user != null) { await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false); }
-					return RedirectToAction("Account", "Pizza");
+					var result = await _userManager.ChangePasswordAsync(userLookup.Result, model.CurrentPasswordHash, model.NewPasswordHash);
+					if (result.Succeeded)
+					{
+						var user = await _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+						if (user != null) { await _signInManager.SignInAsync(user, false); }
+						return RedirectToAction("Account", "Pizza");
+					}
+					else { AddErrors(result); }
 				}
-				else { AddErrors(result); }
+				else { ModelState.AddModelError("", userLookup.Exception.Message); }
 			}
 			return View(model);
 		}
 
 		[AllowAnonymous]
-		public ActionResult Login()
+		public IActionResult Login()
 		{
-			ViewBag.SectionName = SectionName;
-
 			return View();
 		}
 
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Login(LoginModel model)
+		public async Task<IActionResult> Login(LoginModel model)
 		{
-			ViewBag.SectionName = SectionName;
-
 			if (ModelState.IsValid)
 			{
-				var result = await SignInManager.PasswordSignInAsync(model.EmailAddress, model.PasswordHash, model.RememberUser, shouldLockout: true);
-				switch (result)
-				{
-					case SignInStatus.Success:
-						return RedirectToAction("Account", "Pizza");
-					case SignInStatus.LockedOut:
-						model.LockedOut = true;
-						return View(model);
-					default:
-						ModelState.AddModelError("", "Invalid login attempt.");
-						return View(model);
+				var result = await _signInManager.PasswordSignInAsync(model.EmailAddress, model.PasswordHash, model.RememberUser, true);
+				if (result.Succeeded) {
+					return RedirectToAction("Account", "Pizza");
+				}
+				else if (result.IsLockedOut) {
+					model.LockedOut = true;
+					return View(model);
+				}
+				else {
+					ModelState.AddModelError("", "Invalid login attempt.");
+					return View(model);
 				}
 			}
 			else return View(model);
 		}
 
-		public ActionResult Logout()
+		public async Task<IActionResult> Logout()
 		{
-			ViewBag.SectionName = SectionName;
-
-			if (Request.IsAuthenticated) {
-				AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+			if (_signInManager.IsSignedIn(User))
+			{
+				await _signInManager.SignOutAsync();
 				return RedirectToAction("Home", "Pizza");
 			}
 			else return RedirectToAction("Login", "Pizza");
 		}
 
 		[AllowAnonymous]
-		public ActionResult Register()
+		public IActionResult Register()
 		{
-			ViewBag.SectionName = SectionName;
-
-			if (Request.IsAuthenticated) {return RedirectToAction("Account", "Pizza");}
-			else {return View();}
+			if (_signInManager.IsSignedIn(User)) { return RedirectToAction("Account", "Pizza"); }
+			else { return View(); }
 		}
 
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Register(RegistrationModel model)
+		public async Task<IActionResult> Register(RegistrationModel model)
 		{
-			ViewBag.SectionName = SectionName;
-
 			if (ModelState.IsValid)
 			{
 				var user = new PizzaUser
 				{
-					UserName = model.EmailAddress,
-					Email = model.EmailAddress,
-					PhoneNumber = model.PhoneNumber,
+					UserName = model.EmailAddress.ToLower(),
+					Email = model.EmailAddress.ToLower(),
+					PhoneNumber = NormalizePhoneNumber(model.PhoneNumber),
 
 					EncryptionAlgorithm = model.EncryptionAlgorithm,
 					ReceivesEmails = model.ReceivesEmails,
@@ -278,10 +262,10 @@ namespace Portfolio.Controllers
 					State = model.State,
 					ZipCode = model.ZipCode
 				};
-				var result = await UserManager.CreateAsync(user, model.PasswordHash);
+				IdentityResult result = await _userManager.CreateAsync(user, model.PasswordHash);
 				if (result.Succeeded)
 				{
-					await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+					await _signInManager.SignInAsync(user, false);
 
 					model.Registered = true;
 
@@ -291,20 +275,6 @@ namespace Portfolio.Controllers
 			}
 
 			return View(model);
-		}
-
-		public ActionResult _CartWidget()
-		{
-			return PartialView(DeserializeMenuData());
-		}
-
-		public ContentResult MenuData()
-		{
-			string unmappedPath = "~/App_Data/MenuData.json";
-			string mappedPath = Server.MapPath(unmappedPath);
-			string fileText = System.IO.File.ReadAllText(mappedPath);
-
-			return Content(fileText);
 		}
 	}
 }

@@ -1,0 +1,9 @@
+﻿@model ErrorViewModel
+@{ ViewBag.PageName = "Error"; }
+<main class="pure-g">
+	@Html.Partial("~/Views/Portfolio/_Card.cshtml", new CardModel
+	{
+		Title = "Error",
+		Text = "An error occurred while processing your request." + (Model.ShowRequestId ? (" Request ID: " + Model.RequestId) : "")
+	})
+</main>

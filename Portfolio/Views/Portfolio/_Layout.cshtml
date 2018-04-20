@@ -4,15 +4,37 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewBag.SectionName - @ViewBag.PageName</title>
-	@Styles.Render("~/Content/portfolio")
-	<link rel="stylesheet" type="text/css" href="/Content/index.css">
-	@if (ViewBag.PageStyles != null) { foreach (string style in ViewBag.PageStyles) {<link rel="stylesheet" type="text/css" href=@style>} }
-	@Scripts.Render("~/Scripts/portfolio")
-	@if (ViewBag.PageScripts != null) { foreach (string script in ViewBag.PageScripts) {<script src=@script></script>} }
+	<link rel="stylesheet" type="text/css" href="~/css/portfolio.min.css">
+	<link rel="stylesheet" type="text/css" href="~/css/index.css">
+	@if (ViewBag.PageStyles != null)
+	{
+		foreach (string style in ViewBag.PageStyles)
+		{
+			<link rel="stylesheet" type="text/css" href=@style>
+		}
+	}
+	<script src="~/js/portfolio.min.js"></script>
+	@if (ViewBag.PageScripts != null)
+	{
+		foreach (string script in ViewBag.PageScripts)
+		{
+			<script src=@script></script>
+		}
+	}
 </head>
 <body>
 	@Html.Partial("~/Views/Shared/_NoScript.cshtml")
 	@Html.Partial("~/Views/Shared/_SiteNav.cshtml")
+	<header class="pure-g">
+		<section class="@ViewBag.PureClasses">
+			<h1 class="entersFromLeft">@ViewBag.SectionName @ViewBag.PageName</h1>
+		</section>
+	</header>
 	@RenderBody()
+	<footer class="pure-g">
+		<section class="@ViewBag.PureClasses">
+			<h5 class="entersFromLeft">This page uses the Google Font <a href="https://fonts.google.com/specimen/Roboto">Roboto</a>, and an aesthetic inspired by <a href="https://material.io/">Material Design</a>.</h5>
+		</section>
+	</footer>
 </body>
 </html>

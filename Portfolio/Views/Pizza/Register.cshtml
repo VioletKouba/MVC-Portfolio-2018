@@ -1,24 +1,25 @@
-﻿@model Portfolio.Models.RegistrationModel
+﻿@model RegistrationModel
 @{
 	ViewBag.PageName = "Register";
-	ViewBag.PageScripts = new string[] {"/Scripts/sha256.js", "/Scripts/hashPasswords.js"};
+	ViewBag.PageScripts = new string[] { "/js/hashPasswords.min.js" };
 }
 <main class="pure-g">
-	<section class="@Global.PureClasses glass">
+	<section class="@ViewBag.PureClasses glass">
 		@{
-			if(Model != null && Model.Registered == true) {
+			if (Model != null && Model.Registered == true)
+			{
 				<h2 class="sectionHeading">Registered</h2>
 				<p class="sectionDescription">Congratulations! You're now signed up for a @ViewBag.SectionName account, and have been logged in automatically. In future visits to the site, you may log in at any time with the email address and password you provided.</p>
 			}
-			else {
+			else
+			{
 				<h2 class="sectionHeading">@ViewBag.PageName</h2>
 				<p class="sectionDescription">A @ViewBag.SectionName account allows you to save your location details for all future orders and receive emails about current promotions. It's a real lifetime value! Please note that @ViewBag.SectionName is currently only located in the US.</p>
 				using (Html.BeginForm("Register", "Pizza", FormMethod.Post, new { @class = "hashedPasswords" }))
 				{
 					@Html.AntiForgeryToken()
 					@Html.ValidationSummary("")
-					@Html.HiddenFor(m => m.EncryptionAlgorithm, new { Value = "SHA-256" })
-					@Html.HiddenFor(m => m.Country, new { Value = "United States of America" })
+					@Html.HiddenFor(m => m.EncryptionAlgorithm)
 					<p id="requiredExplanation">Indicates that a field is required.</p>
 					<div class="formBlock">
 						<div class="inputBlock">
@@ -86,10 +87,10 @@
 							@Html.TextBoxFor(m => m.ZipCode)
 						</div>
 					</div>
-					<br/>
+					<br />
 					<div class="formBlock">
 						<div class="inputBlock">
-							<input type="submit" value="Register"/>
+							<input type="submit" value="Register" />
 						</div>
 					</div>
 				}

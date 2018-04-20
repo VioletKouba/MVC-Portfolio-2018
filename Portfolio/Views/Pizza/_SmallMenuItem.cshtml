@@ -1,4 +1,4 @@
-﻿@model KeyValuePair<string, Portfolio.Models.MenuDataModel.MenuData.MenuItemData>
+﻿@model KeyValuePair<string, MenuDataModel.MenuData.MenuItemData>
 <li class="menuItem itemListing" id="@Model.Key">
 	<h4 class="itemName">@Model.Value.Name</h4>
 	@Html.Partial("~/Views/Pizza/_OrderButton.cshtml", Model.Value)

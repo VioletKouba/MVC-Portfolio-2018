@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Portfolio.Models.PortfolioViewModels;
 
 namespace Portfolio.Controllers
 {
 	public class PortfolioController : Controller
 	{
-		public static string SectionName
+		public IActionResult Index()
 		{
-			get { return "Portfolio"; }
+			return View();
 		}
 
-		public ActionResult Index()
+		public IActionResult Error()
 		{
-			ViewBag.SectionName = SectionName;
-
-			return View();
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }
