@@ -11,6 +11,8 @@
 		<PackageLicenseUrl>https://github.com/IanDoone/MVC-Portfolio-2018/blob/master/LICENSE</PackageLicenseUrl>
 		<RepositoryUrl>https://github.com/IanDoone/MVC-Portfolio-2018</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
+		<RootNamespace>Portfolio</RootNamespace>
+		<PackageProjectUrl>https://ian.prototeam.org</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
