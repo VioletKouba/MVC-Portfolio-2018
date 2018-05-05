@@ -50,10 +50,10 @@
 		"sourceMap": false
 	},
 	{
-		"outputFileName": "wwwroot/js/hashPasswords.min.js",
+		"outputFileName": "wwwroot/js/accountForm.min.js",
 		"inputFiles": [
 			"wwwroot/js/sha256.js",
-			"wwwroot/js/hashPasswords.js"
+			"wwwroot/js/accountForm.js"
 		],
 		// Optionally specify minification options
 		"minify": {

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Portfolio.Models.SharedViewModels
 {
-    public class CarouselItemModel
+	public class CarouselItemModel
 	{
 		public string URL { get; set; }
-		public string Background { get; set; }
+		public string Image { get; set; }
 		public string Caption { get; set; }
 	}
 }

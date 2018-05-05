@@ -1,5 +1,25 @@
 body {
-	background: url("/images/backgroundpizza.jpeg") left top/cover fixed;
+	background: left top/cover fixed;
+	background-image: url("/images/backgroundpizza-small.jpeg");
+}
+
+/*Using larger versions of the background as the screen becomes too large for the previous size.*/
+@media screen and (min-width: 415px), screen and (min-height: 813px) {
+	body {
+		background-image: url("/images/backgroundpizza-medium.jpeg");
+	}
+}
+
+@media screen and (min-width: 1367px), screen and (min-height: 1025px) {
+	body {
+		background-image: url("/images/backgroundpizza-large.jpeg");
+	}
+}
+
+@media screen and (min-width: 1921px), screen and (min-height: 1201px) {
+	body {
+		background-image: url("/images/backgroundpizza-verylarge.jpeg");
+	}
 }
 
 footer h5 {

@@ -1,7 +1,7 @@
 ﻿@model RegistrationModel
 @{
 	ViewBag.PageName = "Register";
-	ViewBag.PageScripts = new string[] { "/js/hashPasswords.min.js" };
+	ViewBag.PageScripts = new string[] { "/js/accountForm.min.js" };
 }
 <main class="pure-g">
 	<section class="@ViewBag.PureClasses glass">
@@ -15,7 +15,7 @@
 			{
 				<h2 class="sectionHeading">@ViewBag.PageName</h2>
 				<p class="sectionDescription">A @ViewBag.SectionName account allows you to save your location details for all future orders and receive emails about current promotions. It's a real lifetime value! Please note that @ViewBag.SectionName is currently only located in the US.</p>
-				using (Html.BeginForm("Register", "Pizza", FormMethod.Post, new { @class = "hashedPasswords" }))
+				using (Html.BeginForm("Register", "Pizza", FormMethod.Post, new { @class = "accountForm" }))
 				{
 					@Html.AntiForgeryToken()
 					@Html.ValidationSummary("")
@@ -24,7 +24,7 @@
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.EmailAddress, new { @class = "required" })
-							@Html.TextBoxFor(m => m.EmailAddress)
+							@Html.TextBoxFor(m => m.EmailAddress, new { required = "", type = "email" })
 						</div>
 						<div class="inputBlock checkBoxBlock">
 							@Html.LabelFor(m => m.ReceivesEmails)
@@ -34,57 +34,57 @@
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.PasswordHash, new { @class = "required" })
-							@Html.PasswordFor(m => m.PasswordHash)
+							@Html.PasswordFor(m => m.PasswordHash, new { minlength = 6, required = "" })
 						</div>
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.ConfirmPasswordHash, new { @class = "required" })
-							@Html.PasswordFor(m => m.ConfirmPasswordHash)
+							@Html.PasswordFor(m => m.ConfirmPasswordHash, new { minlength = 6, required = "" })
 						</div>
 					</div>
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.FirstName, new { @class = "required" })
-							@Html.TextBoxFor(m => m.FirstName)
+							@Html.TextBoxFor(m => m.FirstName, new { required = "" })
 						</div>
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.LastName, new { @class = "required" })
-							@Html.TextBoxFor(m => m.LastName)
+							@Html.TextBoxFor(m => m.LastName, new { required = "" })
 						</div>
 					</div>
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.PhoneNumber, new { @class = "required" })
-							@Html.TextBoxFor(m => m.PhoneNumber)
+							@Html.TextBoxFor(m => m.PhoneNumber, new { pattern = "^\\(*\\d{3}\\)*(?:\\s|-)*\\d{3}(?:\\s|-)*\\d{4}$", required = "" })
 						</div>
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.PhoneExtension)
-							@Html.TextBoxFor(m => m.PhoneExtension)
+							@Html.TextBoxFor(m => m.PhoneExtension, new { pattern = "^\\d{1,4}$" })
 						</div>
 					</div>
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.StreetAddress, new { @class = "required" })
-							@Html.TextBoxFor(m => m.StreetAddress)
+							@Html.TextBoxFor(m => m.StreetAddress, new { pattern = "^\\d+\\s.+$", required = "" })
 						</div>
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.ApartmentNumber)
-							@Html.TextBoxFor(m => m.ApartmentNumber)
+							@Html.TextBoxFor(m => m.ApartmentNumber, new { pattern = "^\\d{1,4}$" })
 						</div>
 					</div>
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.City, new { @class = "required" })
-							@Html.TextBoxFor(m => m.City)
+							@Html.TextBoxFor(m => m.City, new { required = "" })
 						</div>
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.State, new { @class = "required" })
-							@Html.TextBoxFor(m => m.State)
+							@Html.TextBoxFor(m => m.State, new { required = "" })
 						</div>
 					</div>
 					<div class="formBlock">
 						<div class="inputBlock">
 							@Html.LabelFor(m => m.ZipCode, new { @class = "required" })
-							@Html.TextBoxFor(m => m.ZipCode)
+							@Html.TextBoxFor(m => m.ZipCode, new { pattern = "^\\d{5}(?:-\\d{4})*$", required = "" })
 						</div>
 					</div>
 					<br />

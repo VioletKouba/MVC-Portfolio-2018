@@ -9,7 +9,7 @@ using Portfolio.Models;
 
 namespace Portfolio.Data
 {
-    public class PizzaDbContext : IdentityDbContext<PizzaUser>
+	public class PizzaDbContext : IdentityDbContext<PizzaUser>
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

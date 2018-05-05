@@ -36,7 +36,7 @@
 	min-width: 24px;
 	opacity: 0.7;
 	position: absolute;
-	padding: 276px 0;
+	padding: 216px 0;
 	top: 3px;
 	width: 8%;
 	z-index: 2;
@@ -81,7 +81,7 @@
 	border-left-width: 1.5px;
 	border-right-width: 1.5px;
 	display: inline-block;
-	height: 606px;
+	height: 486px;
 	position: relative;
 	width: 100%;
 }
@@ -93,11 +93,25 @@
 	font-size: x-large;
 	left: 0;
 	height: 8%;
-	padding: 10px 0;
+	padding: 4px 0;
 	position: absolute;
 	text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
 	width: 100%;
 	z-index: 1;
+}
+
+@media screen and (min-width: 35.5em) {
+	.carouselControl {
+		padding: 276px 0;
+	}
+
+	.carouselItemContainer > .carouselItem {
+		height: 606px;
+	}
+
+	.carouselItemContainer > .carouselItem > .itemCaption {
+		padding: 8px 0;
+	}
 }
 
 .carouselPlaceDisplay {

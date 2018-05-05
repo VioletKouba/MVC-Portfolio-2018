@@ -26,7 +26,7 @@ namespace Portfolio.Controllers
 			_signInManager = signInManager;
 		}
 
-		private void AddErrors(IdentityResult result) { foreach (IdentityError error in result.Errors) { ModelState.AddModelError("", error.ToString()); } }
+		private void AddErrors(IdentityResult result) { foreach (IdentityError error in result.Errors) {if(error.Code != "DuplicateUserName") { ModelState.AddModelError("", error.Description);} } }
 
 		private string NormalizePhoneNumber(string PhoneNumber)
 		{
@@ -117,14 +117,15 @@ namespace Portfolio.Controllers
 					{
 						UserHelper helper = new UserHelper(_userManager.GetUserId(HttpContext.User));
 
-						string normalizedEmail = model.EmailAddress.ToLower();
+						string lowercaseEmail = model.EmailAddress.ToLower();
+						string uppercaseEmail = model.EmailAddress.ToUpper();
 
-						if (helper.user.NormalizedEmail == normalizedEmail || (await helper.manager.FindByEmailAsync(normalizedEmail)) == null)
+						if (helper.user.NormalizedEmail == uppercaseEmail || (await helper.manager.FindByEmailAsync(lowercaseEmail)) == null)
 						{
-							helper.user.Email = normalizedEmail;
-							helper.user.NormalizedEmail = normalizedEmail;
-							helper.user.UserName = normalizedEmail;
-							helper.user.NormalizedUserName = normalizedEmail;
+							helper.user.Email = lowercaseEmail;
+							helper.user.NormalizedEmail = uppercaseEmail;
+							helper.user.UserName = lowercaseEmail;
+							helper.user.NormalizedUserName = uppercaseEmail;
 
 							helper.user.ReceivesEmails = model.ReceivesEmails;
 							helper.user.FirstName = model.FirstName;
